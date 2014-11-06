@@ -44,6 +44,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate {
         }
         else{
             centralManager.stopScan()
+            println("Scan stopped")
         }
     }
     
