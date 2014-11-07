@@ -7,46 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16E5CDB41A0B261800B88699 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E5CDB31A0B261800B88699 /* AppDelegate.swift */; };
-		16E5CDB61A0B261800B88699 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E5CDB51A0B261800B88699 /* ViewController.swift */; };
-		16E5CDB91A0B261800B88699 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16E5CDB71A0B261800B88699 /* Main.storyboard */; };
-		16E5CDBB1A0B261800B88699 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16E5CDBA1A0B261800B88699 /* Images.xcassets */; };
-		16E5CDBE1A0B261800B88699 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16E5CDBC1A0B261800B88699 /* LaunchScreen.xib */; };
-		16E5CDCA1A0B261800B88699 /* UsherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E5CDC91A0B261800B88699 /* UsherAppTests.swift */; };
+		9BA24B921A0C7A91002EF192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA24B911A0C7A91002EF192 /* AppDelegate.swift */; };
+		9BA24B941A0C7A91002EF192 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA24B931A0C7A91002EF192 /* ViewController.swift */; };
+		9BA24B971A0C7A91002EF192 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA24B951A0C7A91002EF192 /* Main.storyboard */; };
+		9BA24B991A0C7A91002EF192 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BA24B981A0C7A91002EF192 /* Images.xcassets */; };
+		9BA24B9C1A0C7A91002EF192 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BA24B9A1A0C7A91002EF192 /* LaunchScreen.xib */; };
+		9BA24BA81A0C7A91002EF192 /* FanAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA24BA71A0C7A91002EF192 /* FanAppTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		16E5CDC41A0B261800B88699 /* PBXContainerItemProxy */ = {
+		9BA24BA21A0C7A91002EF192 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 16E5CDA61A0B261800B88699 /* Project object */;
+			containerPortal = 9BA24B841A0C7A91002EF192 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 16E5CDAD1A0B261800B88699;
-			remoteInfo = UsherApp;
+			remoteGlobalIDString = 9BA24B8B1A0C7A91002EF192;
+			remoteInfo = FanApp;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		16E5CDAE1A0B261800B88699 /* UsherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UsherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		16E5CDB21A0B261800B88699 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		16E5CDB31A0B261800B88699 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		16E5CDB51A0B261800B88699 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		16E5CDB81A0B261800B88699 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		16E5CDBA1A0B261800B88699 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		16E5CDBD1A0B261800B88699 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		16E5CDC31A0B261800B88699 /* UsherAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsherAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		16E5CDC81A0B261800B88699 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		16E5CDC91A0B261800B88699 /* UsherAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsherAppTests.swift; sourceTree = "<group>"; };
+		9BA24B8C1A0C7A91002EF192 /* FanApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FanApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BA24B901A0C7A91002EF192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BA24B911A0C7A91002EF192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9BA24B931A0C7A91002EF192 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9BA24B961A0C7A91002EF192 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9BA24B981A0C7A91002EF192 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9BA24B9B1A0C7A91002EF192 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		9BA24BA11A0C7A91002EF192 /* FanAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FanAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BA24BA61A0C7A91002EF192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BA24BA71A0C7A91002EF192 /* FanAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanAppTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		16E5CDAB1A0B261800B88699 /* Frameworks */ = {
+		9BA24B891A0C7A91002EF192 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		16E5CDC01A0B261800B88699 /* Frameworks */ = {
+		9BA24B9E1A0C7A91002EF192 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -56,58 +56,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		16E5CDA51A0B261800B88699 = {
+		9BA24B831A0C7A91002EF192 = {
 			isa = PBXGroup;
 			children = (
-				16E5CDB01A0B261800B88699 /* UsherApp */,
-				16E5CDC61A0B261800B88699 /* UsherAppTests */,
-				16E5CDAF1A0B261800B88699 /* Products */,
+				9BA24B8E1A0C7A91002EF192 /* FanApp */,
+				9BA24BA41A0C7A91002EF192 /* FanAppTests */,
+				9BA24B8D1A0C7A91002EF192 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		16E5CDAF1A0B261800B88699 /* Products */ = {
+		9BA24B8D1A0C7A91002EF192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				16E5CDAE1A0B261800B88699 /* UsherApp.app */,
-				16E5CDC31A0B261800B88699 /* UsherAppTests.xctest */,
+				9BA24B8C1A0C7A91002EF192 /* FanApp.app */,
+				9BA24BA11A0C7A91002EF192 /* FanAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		16E5CDB01A0B261800B88699 /* UsherApp */ = {
+		9BA24B8E1A0C7A91002EF192 /* FanApp */ = {
 			isa = PBXGroup;
 			children = (
-				16E5CDB31A0B261800B88699 /* AppDelegate.swift */,
-				16E5CDB51A0B261800B88699 /* ViewController.swift */,
-				16E5CDB71A0B261800B88699 /* Main.storyboard */,
-				16E5CDBA1A0B261800B88699 /* Images.xcassets */,
-				16E5CDBC1A0B261800B88699 /* LaunchScreen.xib */,
-				16E5CDB11A0B261800B88699 /* Supporting Files */,
+				9BA24B911A0C7A91002EF192 /* AppDelegate.swift */,
+				9BA24B931A0C7A91002EF192 /* ViewController.swift */,
+				9BA24B951A0C7A91002EF192 /* Main.storyboard */,
+				9BA24B981A0C7A91002EF192 /* Images.xcassets */,
+				9BA24B9A1A0C7A91002EF192 /* LaunchScreen.xib */,
+				9BA24B8F1A0C7A91002EF192 /* Supporting Files */,
 			);
-			path = UsherApp;
+			path = FanApp;
 			sourceTree = "<group>";
 		};
-		16E5CDB11A0B261800B88699 /* Supporting Files */ = {
+		9BA24B8F1A0C7A91002EF192 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				16E5CDB21A0B261800B88699 /* Info.plist */,
+				9BA24B901A0C7A91002EF192 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		16E5CDC61A0B261800B88699 /* UsherAppTests */ = {
+		9BA24BA41A0C7A91002EF192 /* FanAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				16E5CDC91A0B261800B88699 /* UsherAppTests.swift */,
-				16E5CDC71A0B261800B88699 /* Supporting Files */,
+				9BA24BA71A0C7A91002EF192 /* FanAppTests.swift */,
+				9BA24BA51A0C7A91002EF192 /* Supporting Files */,
 			);
-			path = UsherAppTests;
+			path = FanAppTests;
 			sourceTree = "<group>";
 		};
-		16E5CDC71A0B261800B88699 /* Supporting Files */ = {
+		9BA24BA51A0C7A91002EF192 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				16E5CDC81A0B261800B88699 /* Info.plist */,
+				9BA24BA61A0C7A91002EF192 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -115,60 +115,60 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		16E5CDAD1A0B261800B88699 /* UsherApp */ = {
+		9BA24B8B1A0C7A91002EF192 /* FanApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 16E5CDCD1A0B261800B88699 /* Build configuration list for PBXNativeTarget "UsherApp" */;
+			buildConfigurationList = 9BA24BAB1A0C7A91002EF192 /* Build configuration list for PBXNativeTarget "FanApp" */;
 			buildPhases = (
-				16E5CDAA1A0B261800B88699 /* Sources */,
-				16E5CDAB1A0B261800B88699 /* Frameworks */,
-				16E5CDAC1A0B261800B88699 /* Resources */,
+				9BA24B881A0C7A91002EF192 /* Sources */,
+				9BA24B891A0C7A91002EF192 /* Frameworks */,
+				9BA24B8A1A0C7A91002EF192 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = UsherApp;
-			productName = UsherApp;
-			productReference = 16E5CDAE1A0B261800B88699 /* UsherApp.app */;
+			name = FanApp;
+			productName = FanApp;
+			productReference = 9BA24B8C1A0C7A91002EF192 /* FanApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		16E5CDC21A0B261800B88699 /* UsherAppTests */ = {
+		9BA24BA01A0C7A91002EF192 /* FanAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 16E5CDD01A0B261800B88699 /* Build configuration list for PBXNativeTarget "UsherAppTests" */;
+			buildConfigurationList = 9BA24BAE1A0C7A91002EF192 /* Build configuration list for PBXNativeTarget "FanAppTests" */;
 			buildPhases = (
-				16E5CDBF1A0B261800B88699 /* Sources */,
-				16E5CDC01A0B261800B88699 /* Frameworks */,
-				16E5CDC11A0B261800B88699 /* Resources */,
+				9BA24B9D1A0C7A91002EF192 /* Sources */,
+				9BA24B9E1A0C7A91002EF192 /* Frameworks */,
+				9BA24B9F1A0C7A91002EF192 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				16E5CDC51A0B261800B88699 /* PBXTargetDependency */,
+				9BA24BA31A0C7A91002EF192 /* PBXTargetDependency */,
 			);
-			name = UsherAppTests;
-			productName = UsherAppTests;
-			productReference = 16E5CDC31A0B261800B88699 /* UsherAppTests.xctest */;
+			name = FanAppTests;
+			productName = FanAppTests;
+			productReference = 9BA24BA11A0C7A91002EF192 /* FanAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		16E5CDA61A0B261800B88699 /* Project object */ = {
+		9BA24B841A0C7A91002EF192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = "		";
+				ORGANIZATIONNAME = "TM-UCLA-BLE";
 				TargetAttributes = {
-					16E5CDAD1A0B261800B88699 = {
+					9BA24B8B1A0C7A91002EF192 = {
 						CreatedOnToolsVersion = 6.1;
 					};
-					16E5CDC21A0B261800B88699 = {
+					9BA24BA01A0C7A91002EF192 = {
 						CreatedOnToolsVersion = 6.1;
-						TestTargetID = 16E5CDAD1A0B261800B88699;
+						TestTargetID = 9BA24B8B1A0C7A91002EF192;
 					};
 				};
 			};
-			buildConfigurationList = 16E5CDA91A0B261800B88699 /* Build configuration list for PBXProject "UsherApp" */;
+			buildConfigurationList = 9BA24B871A0C7A91002EF192 /* Build configuration list for PBXProject "FanApp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -176,29 +176,29 @@
 				en,
 				Base,
 			);
-			mainGroup = 16E5CDA51A0B261800B88699;
-			productRefGroup = 16E5CDAF1A0B261800B88699 /* Products */;
+			mainGroup = 9BA24B831A0C7A91002EF192;
+			productRefGroup = 9BA24B8D1A0C7A91002EF192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				16E5CDAD1A0B261800B88699 /* UsherApp */,
-				16E5CDC21A0B261800B88699 /* UsherAppTests */,
+				9BA24B8B1A0C7A91002EF192 /* FanApp */,
+				9BA24BA01A0C7A91002EF192 /* FanAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		16E5CDAC1A0B261800B88699 /* Resources */ = {
+		9BA24B8A1A0C7A91002EF192 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16E5CDB91A0B261800B88699 /* Main.storyboard in Resources */,
-				16E5CDBE1A0B261800B88699 /* LaunchScreen.xib in Resources */,
-				16E5CDBB1A0B261800B88699 /* Images.xcassets in Resources */,
+				9BA24B971A0C7A91002EF192 /* Main.storyboard in Resources */,
+				9BA24B9C1A0C7A91002EF192 /* LaunchScreen.xib in Resources */,
+				9BA24B991A0C7A91002EF192 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		16E5CDC11A0B261800B88699 /* Resources */ = {
+		9BA24B9F1A0C7A91002EF192 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -208,46 +208,46 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		16E5CDAA1A0B261800B88699 /* Sources */ = {
+		9BA24B881A0C7A91002EF192 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16E5CDB61A0B261800B88699 /* ViewController.swift in Sources */,
-				16E5CDB41A0B261800B88699 /* AppDelegate.swift in Sources */,
+				9BA24B941A0C7A91002EF192 /* ViewController.swift in Sources */,
+				9BA24B921A0C7A91002EF192 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		16E5CDBF1A0B261800B88699 /* Sources */ = {
+		9BA24B9D1A0C7A91002EF192 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16E5CDCA1A0B261800B88699 /* UsherAppTests.swift in Sources */,
+				9BA24BA81A0C7A91002EF192 /* FanAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		16E5CDC51A0B261800B88699 /* PBXTargetDependency */ = {
+		9BA24BA31A0C7A91002EF192 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 16E5CDAD1A0B261800B88699 /* UsherApp */;
-			targetProxy = 16E5CDC41A0B261800B88699 /* PBXContainerItemProxy */;
+			target = 9BA24B8B1A0C7A91002EF192 /* FanApp */;
+			targetProxy = 9BA24BA21A0C7A91002EF192 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		16E5CDB71A0B261800B88699 /* Main.storyboard */ = {
+		9BA24B951A0C7A91002EF192 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				16E5CDB81A0B261800B88699 /* Base */,
+				9BA24B961A0C7A91002EF192 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		16E5CDBC1A0B261800B88699 /* LaunchScreen.xib */ = {
+		9BA24B9A1A0C7A91002EF192 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				16E5CDBD1A0B261800B88699 /* Base */,
+				9BA24B9B1A0C7A91002EF192 /* Base */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -255,7 +255,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		16E5CDCB1A0B261800B88699 /* Debug */ = {
+		9BA24BA91A0C7A91002EF192 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -298,7 +298,7 @@
 			};
 			name = Debug;
 		};
-		16E5CDCC1A0B261800B88699 /* Release */ = {
+		9BA24BAA1A0C7A91002EF192 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -334,27 +334,27 @@
 			};
 			name = Release;
 		};
-		16E5CDCE1A0B261800B88699 /* Debug */ = {
+		9BA24BAC1A0C7A91002EF192 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = UsherApp/Info.plist;
+				INFOPLIST_FILE = FanApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		16E5CDCF1A0B261800B88699 /* Release */ = {
+		9BA24BAD1A0C7A91002EF192 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = UsherApp/Info.plist;
+				INFOPLIST_FILE = FanApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
-		16E5CDD11A0B261800B88699 /* Debug */ = {
+		9BA24BAF1A0C7A91002EF192 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -366,14 +366,14 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = UsherAppTests/Info.plist;
+				INFOPLIST_FILE = FanAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UsherApp.app/UsherApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FanApp.app/FanApp";
 			};
 			name = Debug;
 		};
-		16E5CDD21A0B261800B88699 /* Release */ = {
+		9BA24BB01A0C7A91002EF192 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -381,44 +381,42 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = UsherAppTests/Info.plist;
+				INFOPLIST_FILE = FanAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UsherApp.app/UsherApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FanApp.app/FanApp";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		16E5CDA91A0B261800B88699 /* Build configuration list for PBXProject "UsherApp" */ = {
+		9BA24B871A0C7A91002EF192 /* Build configuration list for PBXProject "FanApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				16E5CDCB1A0B261800B88699 /* Debug */,
-				16E5CDCC1A0B261800B88699 /* Release */,
+				9BA24BA91A0C7A91002EF192 /* Debug */,
+				9BA24BAA1A0C7A91002EF192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		16E5CDCD1A0B261800B88699 /* Build configuration list for PBXNativeTarget "UsherApp" */ = {
+		9BA24BAB1A0C7A91002EF192 /* Build configuration list for PBXNativeTarget "FanApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				16E5CDCE1A0B261800B88699 /* Debug */,
-				16E5CDCF1A0B261800B88699 /* Release */,
+				9BA24BAC1A0C7A91002EF192 /* Debug */,
+				9BA24BAD1A0C7A91002EF192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		16E5CDD01A0B261800B88699 /* Build configuration list for PBXNativeTarget "UsherAppTests" */ = {
+		9BA24BAE1A0C7A91002EF192 /* Build configuration list for PBXNativeTarget "FanAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				16E5CDD11A0B261800B88699 /* Debug */,
-				16E5CDD21A0B261800B88699 /* Release */,
+				9BA24BAF1A0C7A91002EF192 /* Debug */,
+				9BA24BB01A0C7A91002EF192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 16E5CDA61A0B261800B88699 /* Project object */;
+	rootObject = 9BA24B841A0C7A91002EF192 /* Project object */;
 }
