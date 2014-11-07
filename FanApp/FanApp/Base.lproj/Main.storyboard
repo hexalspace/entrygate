@@ -29,7 +29,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JbW-rN-AXM">
-                                <rect key="frame" x="48" y="311" width="138" height="30"/>
+                                <rect key="frame" x="44" y="311" width="138" height="30"/>
                                 <state key="normal" title="Generate new ticket">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -37,19 +37,43 @@
                                     <action selector="generateNewTicketID:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9dO-oF-554"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uIb-Je-F5B">
+                                <rect key="frame" x="87" y="349" width="51" height="31"/>
+                                <connections>
+                                    <action selector="searchButtonUpdated:" destination="BYZ-38-t0r" eventType="valueChanged" id="va5-76-i0l"/>
+                                </connections>
+                            </switch>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ecw-76-mgV">
+                                <rect key="frame" x="101" y="409" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Search for Usher " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hl1-Gl-MTC">
+                                <rect key="frame" x="44" y="388" width="134" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="Wid-Vx-cie" secondAttribute="centerX" id="1BK-aP-EKv"/>
+                            <constraint firstItem="uIb-Je-F5B" firstAttribute="top" secondItem="JbW-rN-AXM" secondAttribute="bottom" constant="20" id="BUp-tO-Gy3"/>
                             <constraint firstAttribute="centerX" secondItem="JbW-rN-AXM" secondAttribute="centerX" id="Fcb-Zh-xFg"/>
                             <constraint firstAttribute="centerY" secondItem="Wid-Vx-cie" secondAttribute="centerY" id="INi-bl-X8S"/>
                             <constraint firstAttribute="centerX" secondItem="bSF-SK-PZL" secondAttribute="centerX" id="Omg-Mm-f3x"/>
-                            <constraint firstItem="JbW-rN-AXM" firstAttribute="top" secondItem="Wid-Vx-cie" secondAttribute="bottom" constant="10" id="Sv0-Tf-oRv"/>
+                            <constraint firstAttribute="centerX" secondItem="ecw-76-mgV" secondAttribute="centerX" id="S60-gY-Cyj"/>
+                            <constraint firstItem="JbW-rN-AXM" firstAttribute="top" secondItem="Wid-Vx-cie" secondAttribute="bottom" constant="5" id="Sv0-Tf-oRv"/>
+                            <constraint firstItem="ecw-76-mgV" firstAttribute="top" secondItem="hl1-Gl-MTC" secondAttribute="bottom" constant="5" id="X4L-WF-u2b"/>
+                            <constraint firstItem="hl1-Gl-MTC" firstAttribute="top" secondItem="uIb-Je-F5B" secondAttribute="bottom" constant="10" id="gzM-1A-yRP"/>
+                            <constraint firstAttribute="centerX" secondItem="hl1-Gl-MTC" secondAttribute="centerX" id="sG6-SM-6n8"/>
                             <constraint firstItem="Wid-Vx-cie" firstAttribute="top" secondItem="bSF-SK-PZL" secondAttribute="bottom" constant="104" id="uoU-Al-zcp"/>
+                            <constraint firstAttribute="centerX" secondItem="uIb-Je-F5B" secondAttribute="centerX" id="vjy-8g-kJ2"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchSwitch" destination="uIb-Je-F5B" id="EYd-Si-60n"/>
+                        <outlet property="searchWheel" destination="ecw-76-mgV" id="EMq-oh-jfd"/>
                         <outlet property="ticketIdLabel" destination="Wid-Vx-cie" id="CRo-pm-zij"/>
+                        <outlet property="usherLabel" destination="hl1-Gl-MTC" id="nv6-ey-KCn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
