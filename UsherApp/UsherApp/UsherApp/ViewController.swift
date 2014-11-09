@@ -1,6 +1,5 @@
 //
 //  ViewController.swift
-//  Test
 //
 //  Created by Jacob Jarecki on 11/2/14.
 //  Copyright (c) 2014 Jacob Jarecki. All rights reserved.
@@ -15,15 +14,14 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     let TM_USHER_CLIENT_COMMS = CBUUID(string: "BA0A5518-4D18-443A-817F-D726062085BD")
     let TM_USHER_CLIENT_COMMS_CHARACTERICS = CBUUID(string: "C04761A0-51E9-4653-B51D-FC93C3B691CF")
     
-    var ticketNumber : Int = 0
-    
+    var ticketNumber : Int32 = 0
     var centralManager : CBCentralManager!
-    
     var peripheralUser : CBPeripheral!
     
     @IBOutlet var scanSwitch : UISwitch!
-    
     @IBOutlet var ticketNumberLabel :UILabel!
+    
+    //// UI Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +32,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    //// UI Functions
     
     @IBAction func startScan(sender: AnyObject){
         if (scanSwitch.on){
@@ -56,7 +52,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         ticketNumberLabel.text = "Ticker number: \(ticketNumber)"
     }
     
-    //// CBDelegateManager
+    //// CBDelegateManager Functions
     
     func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
         centralManager.connectPeripheral(peripheral, options: nil)
@@ -70,10 +66,32 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func centralManagerDidUpdateState(central: CBCentralManager!) {
+        switch centralManager.state {
+        case .PoweredOff:
+            println("Bluetooth is powered off")
+            break
+        case .PoweredOn:
+            println("Bluetooth is powered on")
+            break
+        case .Resetting:
+            println("Bluetooth is currently resetting")
+            break
+        case .Unauthorized:
+            println("Bluetooth access is unauthorized")
+            break
+        case .Unknown:
+            println("Bluetooth status is unknown")
+            break
+        case .Unsupported:
+            println("Bluetooth is not supported on this device")
+            break
+        default:
+            println("Device is a potato")
+            break
+        }
     }
     
-    
-    /// CBPeripheralDelegate
+    /// CBPeripheralDelegate Functions
     
     func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
         for service in peripheral.services {
