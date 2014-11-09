@@ -10,7 +10,7 @@ import UIKit
 import CoreBluetooth
 import QuartzCore
 
-class ViewController: UIViewController, CBPeripheralManagerDelegate {
+class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralManagerDelegate {
     
     //BlueTooth standard UUIDs from developer.bluetooth.org/gatt/services/pages/ServicesHome.aspx
     let TM_FAN_DEVICE_INFO_SERVICE_UUID = CBUUID(string:"180A")
@@ -24,9 +24,10 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate {
         self.ticketID = arc4random_uniform(899999) + 100000
     }
     
+    //Parameters should be self, nil. Not working without nil, nil
     var peripheralManager = CBPeripheralManager(delegate: nil, queue: nil)
-    //peripheralManager.addService(CBMutableSerice(UUID: TM_FAN_USER_DATA_SERVICE_UUID, isPrimary: true))
-    //peripheralManager.addService(CBMutableSerice(UUID: TM_FAN_DEVICE_INFO_SERVICE_UUID, isPrimary: false))
+    //peripheralManager.addService(CBMutableService(UUID: TM_FAN_USER_DATA_SERVICE_UUID, isPrimary: true))
+    //peripheralManager.addService(CBMutableService(UUID: TM_FAN_DEVICE_INFO_SERVICE_UUID, isPrimary: false))
     
     
     
@@ -51,6 +52,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate {
     func refreshUI(){
         self.ticketIdLabel.text = "Your ticket ID is \(ticketID)"
         searchButtonUpdated(self)
+        peripheralManagerDidUpdateState(peripheralManager)
         
     }
     
@@ -71,10 +73,37 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate {
         }
     }
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager!) {
-        /*if(peripheral.state == CBPeripheralManagerState){
-            
-        }*/
+        
+        switch peripheralManager.state {
+        case .PoweredOff:
+            println("Bluetooth is powered off")
+            break
+        case .PoweredOn:
+            println("Bluetooth is powered on")
+            break
+        case .Resetting:
+            println("Bluetooth is currently resetting")
+            break
+        case .Unauthorized:
+            println("Bluetooth access is unauthorized")
+            break
+        case .Unknown:
+            println("Bluetooth status is unknown")
+            break
+        case .Unsupported:
+            println("Bluetooth is not supported on this device")
+            break
+        default:
+            println("Device is a potato")
+            break
 
+        }
+
+    }
+    
+    func centralManagerDidUpdateState(central: CBCentralManager!){
+        
+        
     }
 
 
