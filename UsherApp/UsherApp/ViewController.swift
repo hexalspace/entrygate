@@ -11,7 +11,7 @@ import QuartzCore
 
 class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    var ticketNumber : Int32 = 0
+    var ticketNumber : UInt32 = 0
     var centralManager : CBCentralManager!
     var peripheralUser : CBPeripheral!
     
@@ -104,8 +104,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!){
         if characteristic.properties == CBCharacteristicProperties.Read {
-            // Convert characteristic.value to an integer to set ticketNumber
-            self.ticketNumber = 0
+            self.ticketNumber = dataToInt(characteristic.value)
             refreshUI()
         }
     }
