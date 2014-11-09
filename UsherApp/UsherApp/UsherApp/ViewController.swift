@@ -11,9 +11,6 @@ import QuartzCore
 
 class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    let TM_USHER_CLIENT_COMMS = CBUUID(string: "BA0A5518-4D18-443A-817F-D726062085BD")
-    let TM_USHER_CLIENT_COMMS_CHARACTERICS = CBUUID(string: "C04761A0-51E9-4653-B51D-FC93C3B691CF")
-    
     var ticketNumber : Int32 = 0
     var centralManager : CBCentralManager!
     var peripheralUser : CBPeripheral!
@@ -35,7 +32,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     @IBAction func startScan(sender: AnyObject){
         if (scanSwitch.on){
-            let services = [TM_USHER_CLIENT_COMMS]
+            let services = [TM_USHER_CLIENT_COMMS_SERVICE]
             centralManager.scanForPeripheralsWithServices(services, options: nil)
             println("Scan started")
         }
@@ -62,7 +59,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         peripheral.delegate = self
         println("Connected to discovered peripheral: \(peripheral.name)")
         // May not be needed since we know what service to expect here
-        peripheral.discoverServices([TM_USHER_CLIENT_COMMS])
+        peripheral.discoverServices([TM_USHER_CLIENT_COMMS_SERVICE])
     }
     
     func centralManagerDidUpdateState(central: CBCentralManager!) {
@@ -95,7 +92,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
         for service in peripheral.services {
-            peripheral.discoverCharacteristics([TM_USHER_CLIENT_COMMS_CHARACTERICS], forService: service as CBService)
+            peripheral.discoverCharacteristics([TM_USHER_CLIENT_COMMS_CHARACTERIC_TICKET, TM_USHER_CLIENT_COMMS_CHARACTERIC_STATUS], forService: service as CBService)
         }
     }
     
