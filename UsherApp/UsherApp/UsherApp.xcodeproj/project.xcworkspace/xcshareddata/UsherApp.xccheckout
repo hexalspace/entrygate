@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C609766B-C20D-4CBD-BEA1-990AB1736C28</string>
+	<key>IDESourceControlProjectName</key>
+	<string>UsherApp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>49DF288D47A166953AD9C6E171DC24E42B0D65AD</key>
+		<string>https://github.com/jsjwooowooo/entrygate.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>UsherApp/UsherApp/UsherApp.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>49DF288D47A166953AD9C6E171DC24E42B0D65AD</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jsjwooowooo/entrygate.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>49DF288D47A166953AD9C6E171DC24E42B0D65AD</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>49DF288D47A166953AD9C6E171DC24E42B0D65AD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>entrygate</string>
+		</dict>
+	</array>
+</dict>
+</plist>
