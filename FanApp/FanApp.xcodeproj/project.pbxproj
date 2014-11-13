@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9BA21C351A1482A70024E75A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA21C331A1482A70024E75A /* Main.storyboard */; };
 		9BA24B921A0C7A91002EF192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA24B911A0C7A91002EF192 /* AppDelegate.swift */; };
 		9BA24B941A0C7A91002EF192 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA24B931A0C7A91002EF192 /* ViewController.swift */; };
-		9BA24B971A0C7A91002EF192 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA24B951A0C7A91002EF192 /* Main.storyboard */; };
 		9BA24B991A0C7A91002EF192 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BA24B981A0C7A91002EF192 /* Images.xcassets */; };
 		9BA24B9C1A0C7A91002EF192 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BA24B9A1A0C7A91002EF192 /* LaunchScreen.xib */; };
 		9BA24BA81A0C7A91002EF192 /* FanAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA24BA71A0C7A91002EF192 /* FanAppTests.swift */; };
@@ -26,11 +26,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9BA21C341A1482A70024E75A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9BA24B8C1A0C7A91002EF192 /* FanApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FanApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA24B901A0C7A91002EF192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BA24B911A0C7A91002EF192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BA24B931A0C7A91002EF192 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9BA24B961A0C7A91002EF192 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9BA24B981A0C7A91002EF192 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9BA24B9B1A0C7A91002EF192 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		9BA24BA11A0C7A91002EF192 /* FanAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FanAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,9 +77,9 @@
 		9BA24B8E1A0C7A91002EF192 /* FanApp */ = {
 			isa = PBXGroup;
 			children = (
+				9BA21C331A1482A70024E75A /* Main.storyboard */,
 				9BA24B911A0C7A91002EF192 /* AppDelegate.swift */,
 				9BA24B931A0C7A91002EF192 /* ViewController.swift */,
-				9BA24B951A0C7A91002EF192 /* Main.storyboard */,
 				9BA24B981A0C7A91002EF192 /* Images.xcassets */,
 				9BA24B9A1A0C7A91002EF192 /* LaunchScreen.xib */,
 				9BA24B8F1A0C7A91002EF192 /* Supporting Files */,
@@ -122,6 +122,7 @@
 				9BA24B881A0C7A91002EF192 /* Sources */,
 				9BA24B891A0C7A91002EF192 /* Frameworks */,
 				9BA24B8A1A0C7A91002EF192 /* Resources */,
+				50524F424C454D533F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -192,7 +193,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BA24B971A0C7A91002EF192 /* Main.storyboard in Resources */,
+				9BA21C351A1482A70024E75A /* Main.storyboard in Resources */,
 				9BA24B9C1A0C7A91002EF192 /* LaunchScreen.xib in Resources */,
 				9BA24B991A0C7A91002EF192 /* Images.xcassets in Resources */,
 			);
@@ -206,6 +207,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		50524F424C454D533F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Library/JailCoder/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ]; then\n/Library/JailCoder/Entitlements/Entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9BA24B881A0C7A91002EF192 /* Sources */ = {
@@ -236,10 +253,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9BA24B951A0C7A91002EF192 /* Main.storyboard */ = {
+		9BA21C331A1482A70024E75A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				9BA24B961A0C7A91002EF192 /* Base */,
+				9BA21C341A1482A70024E75A /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -272,7 +289,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -315,7 +332,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -338,6 +355,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = FanApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -348,6 +366,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = FanApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -407,6 +426,7 @@
 				9BA24BAD1A0C7A91002EF192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9BA24BAE1A0C7A91002EF192 /* Build configuration list for PBXNativeTarget "FanAppTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +435,7 @@
 				9BA24BB01A0C7A91002EF192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -26,21 +26,20 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralMa
     
     //Parameters should be self, nil. Not working without nil, nil
     var peripheralManager = CBPeripheralManager(delegate: nil, queue: nil)
-    //peripheralManager.addService(CBMutableService(UUID: TM_FAN_USER_DATA_SERVICE_UUID, isPrimary: true))
-    //peripheralManager.addService(CBMutableService(UUID: TM_FAN_DEVICE_INFO_SERVICE_UUID, isPrimary: false))
-    
-    
+
     
     @IBOutlet var ticketIdLabel: UILabel!
     @IBOutlet var searchSwitch: UISwitch!
     @IBOutlet var usherLabel: UILabel!
     @IBOutlet var searchWheel: UIActivityIndicatorView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //peripheralManager = CBPeripheralManager(delegate self, queue: nil
         searchSwitch.setOn(false, animated:false)
+        setupServices()
         generateNewTicketID(self)
 
     }
@@ -49,6 +48,12 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralMa
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func setupServices(){
+        peripheralManager.addService(CBMutableService(type: TM_FAN_USER_DATA_SERVICE_UUID, primary: true))
+        peripheralManager.addService(CBMutableService(type: TM_FAN_DEVICE_INFO_SERVICE_UUID, primary: false))
+    }
+    
     func refreshUI(){
         self.ticketIdLabel.text = "Your ticket ID is \(ticketID)"
         searchButtonUpdated(self)
