@@ -16,58 +16,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ajy-fs-Eua">
-                                <rect key="frame" x="-25" y="-15" width="51" height="31"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="176" y="384" width="51" height="31"/>
-                                </variation>
-                                <connections>
-                                    <action selector="startScan:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mq7-vI-PLq"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UsherApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSn-ez-TFE">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="98" y="20" width="205" height="153"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ticket Number: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18d-P4-d55">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ticket Number:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5d-yF-JqE">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="123" y="256" width="154" height="87"/>
+                                    <rect key="frame" x="126" y="223" width="148" height="76"/>
                                 </variation>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UsherApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="POb-7G-u2q">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="102" y="52" width="197" height="121"/>
+                                </variation>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iMY-ph-bcC">
+                                <rect key="frame" x="-25" y="-15" width="51" height="31"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="176" y="356" width="51" height="31"/>
+                                </variation>
+                                <connections>
+                                    <action selector="startScan:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OH2-2G-Kfz"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="ajy-fs-Eua"/>
-                                <exclude reference="SSn-ez-TFE"/>
-                                <exclude reference="18d-P4-d55"/>
+                                <exclude reference="S5d-yF-JqE"/>
+                                <exclude reference="POb-7G-u2q"/>
+                                <exclude reference="iMY-ph-bcC"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="ajy-fs-Eua"/>
-                                <include reference="SSn-ez-TFE"/>
-                                <include reference="18d-P4-d55"/>
+                                <include reference="S5d-yF-JqE"/>
+                                <include reference="POb-7G-u2q"/>
+                                <include reference="iMY-ph-bcC"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="scanSwitch" destination="ajy-fs-Eua" id="gXI-OD-6Uw"/>
-                        <outlet property="ticketNumberLabel" destination="18d-P4-d55" id="wS9-5j-Eht"/>
+                        <outlet property="scanSwitch" destination="iMY-ph-bcC" id="VVY-Eh-jiX"/>
+                        <outlet property="ticketNumberLabel" destination="S5d-yF-JqE" id="5wX-cf-aSd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="439.5" y="379"/>
         </scene>
     </scenes>
 </document>
