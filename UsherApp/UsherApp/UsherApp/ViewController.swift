@@ -17,6 +17,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     @IBOutlet var scanSwitch : UISwitch!
     @IBOutlet var ticketNumberLabel :UILabel!
+    @IBOutlet var squareGrid : UICollectionView!
     
     //// UI Functions
     
@@ -34,6 +35,10 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         if (scanSwitch.on){
             let services = [TM_USHER_CLIENT_COMMS_SERVICE]
             centralManager.scanForPeripheralsWithServices(services, options: nil)
+            for cell in squareGrid.visibleCells() as [UICollectionViewCell] {
+                println("CELLS")
+                cell.backgroundColor = UIColor.blueColor()
+            }
             println("Scan started")
         }
         else{
@@ -108,8 +113,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             refreshUI()
         }
     }
-    
-    
     
 }
 
