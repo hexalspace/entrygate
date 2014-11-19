@@ -9,7 +9,7 @@ import UIKit
 import CoreBluetooth
 import QuartzCore
 
-class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
+class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     var ticketNumber : UInt32 = 0
     var centralManager : CBCentralManager!
@@ -17,13 +17,23 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     @IBOutlet var scanSwitch : UISwitch!
     @IBOutlet var ticketNumberLabel :UILabel!
-    @IBOutlet var squareGrid : UICollectionView!
+    @IBOutlet var collectionView : UICollectionView!
     
     //// UI Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         centralManager = CBCentralManager(delegate: self, queue:nil)
+        // Do any additional setup after loading the view, typically from a nib.
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 250, left: 20, bottom: 150, right: 20)
+        layout.itemSize = CGSize(width: 90, height: 90)
+        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.registerClass(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
+        collectionView.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(collectionView)
     }
     
     override func didReceiveMemoryWarning(){
@@ -35,10 +45,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         if (scanSwitch.on){
             let services = [TM_USHER_CLIENT_COMMS_SERVICE]
             centralManager.scanForPeripheralsWithServices(services, options: nil)
-            for cell in squareGrid.visibleCells() as [UICollectionViewCell] {
-                println("CELLS")
-                cell.backgroundColor = UIColor.blueColor()
-            }
             println("Scan started")
         }
         else{
@@ -53,6 +59,25 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     func refreshUI(){
         ticketNumberLabel.text = "Ticker number: \(ticketNumber)"
     }
+    
+    //// Colection View Delegate
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CollectionViewCell", forIndexPath: indexPath) as CollectionViewCell
+        cell.backgroundColor = UIColor.blackColor()
+        cell.textLabel?.text = "\(indexPath.section):\(indexPath.row)"
+        cell.imageView?.image = UIImage(named: "circle")
+        return cell
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 9
+    }
+    
+    
     
     //// CBDelegateManager Functions
     
