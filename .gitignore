@@ -1,13 +1,9 @@
 # /entrygate
 /.gitignore~
-/.DS_Store
-
-*/.DS_Store
+.DS_Store
 
 # /entrygate/FanApp
 /FanApp/FanApp.xcodeproj
-/FanApp/.DS_Store
 
 # /entrygate/UsherApp
 /UsherApp/UsherApp.xcodeproj
-/UsherApp/.DS_Store
