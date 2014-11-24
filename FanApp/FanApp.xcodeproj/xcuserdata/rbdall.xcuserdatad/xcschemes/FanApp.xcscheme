@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9BA24B8B1A0C7A91002EF192"
+               BlueprintIdentifier = "9BC9A80A1A23B6B3007AD0FC"
                BuildableName = "FanApp.app"
                BlueprintName = "FanApp"
                ReferencedContainer = "container:FanApp.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9BA24BA01A0C7A91002EF192"
+               BlueprintIdentifier = "9BC9A81F1A23B6B3007AD0FC"
                BuildableName = "FanAppTests.xctest"
                BlueprintName = "FanAppTests"
                ReferencedContainer = "container:FanApp.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9BA24BA01A0C7A91002EF192"
+               BlueprintIdentifier = "9BC9A81F1A23B6B3007AD0FC"
                BuildableName = "FanAppTests.xctest"
                BlueprintName = "FanAppTests"
                ReferencedContainer = "container:FanApp.xcodeproj">
@@ -56,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9BA24B8B1A0C7A91002EF192"
+            BlueprintIdentifier = "9BC9A80A1A23B6B3007AD0FC"
             BuildableName = "FanApp.app"
             BlueprintName = "FanApp"
             ReferencedContainer = "container:FanApp.xcodeproj">
@@ -75,7 +75,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9BA24B8B1A0C7A91002EF192"
+            BlueprintIdentifier = "9BC9A80A1A23B6B3007AD0FC"
             BuildableName = "FanApp.app"
             BlueprintName = "FanApp"
             ReferencedContainer = "container:FanApp.xcodeproj">
@@ -93,7 +93,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9BA24B8B1A0C7A91002EF192"
+            BlueprintIdentifier = "9BC9A80A1A23B6B3007AD0FC"
             BuildableName = "FanApp.app"
             BlueprintName = "FanApp"
             ReferencedContainer = "container:FanApp.xcodeproj">
