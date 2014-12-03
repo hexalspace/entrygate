@@ -8,18 +8,20 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
+class CollectionViewCell: UICollectionViewCell {
     
     required init(coder aDecoder: NSCoder) {
+        self.ticketNumber = 99
         super.init(coder: aDecoder)
     }
-    
-    let recognizer: UITapGestureRecognizer!
-    
+
     let textLabel: UILabel!
     let imageView: UIImageView!
-    
+
+    var ticketNumber : Int
+
     override init(frame: CGRect) {
+        self.ticketNumber = 99
         super.init(frame: frame)
         
         imageView = UIImageView(frame: CGRect(x: 0, y: 16, width: frame.size.width, height: frame.size.height*2/3))
@@ -31,11 +33,6 @@ class CollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
         textLabel.textAlignment = .Center
         contentView.addSubview(textLabel)
-        
-        recognizer = UITapGestureRecognizer(target: self, action: "handleTap")
-    }
-    
-    func handleTap() {
-        println("TAPPED")
+
     }
 }

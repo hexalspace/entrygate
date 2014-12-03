@@ -76,6 +76,12 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 9
     }
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
+        var current : CollectionViewCell
+        current = collectionView.cellForItemAtIndexPath(indexPath)! as CollectionViewCell
+        println("Selected: \(current.ticketNumber)");
+    }
     
     
     
@@ -117,7 +123,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             break
         }
     }
-    
+
     /// CBPeripheralDelegate Functions
     
     func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
