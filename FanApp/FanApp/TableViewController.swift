@@ -36,31 +36,38 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var possibleTickets = [
         ("CS130 Fall 2014 - C's Get Degrees Tour", "Boelter Dungeon", "12/19/2014", "Section 1, Row 1, Seat 10", "12345"),
-        ("CS130 Fall 2014 - C's Get Degrees Tour", "Boelter Dungeon", "12/19/2014", "Section 1, Row 1, Seat 10", "12346")
+        ("David and the Potatoes", "Nowhere, KN", "07/5/2024", "Section 10, Row 100, Seat 2", "54321")
         
     ]
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return numberOfTicketsToDisplay
+    func tableView(tableView:UITableView, numberOfRowsInSection section: Int)->Int{
+        return self.possibleTickets.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        var cell:CustomTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("customCell") as CustomTableViewCell
-        var (name, venue, date, seat, id) = possibleTickets[indexPath.row]
-        cell.loadItem(ticketName: name, venueName: venue, eventDate: date, seatLocation: seat, ticketID: id)
-        
+        var cell: CustomTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as CustomTableViewCell
+        var(ticket, venue, date, location, id) = self.possibleTickets[indexPath.row]
+        println("Loading cell")
+        cell.loadItem(ticketName: ticket, venueName: venue, eventDate: date, seatLocation: location, ticketID: id)
         return cell
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return numberOfTicketsToDisplay
+    func tableView(tableView:UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        //println("You selected cell #\(indexPath.row)!")
+        let vs: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("ViewController")
+        self.showViewController(vs as UIViewController, sender: vs)
     }
     
-    override func viewDidLoad(){
+    /*func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return numberOfTicketsToDisplay
+    }*/
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
-        //var nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
-        //self.tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "customCell")
+        // Do any additional setup after loading the view, typically from a nib.
+        //self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        //tableView.registerNib(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "CustomTableViewCell")
+        
     }
     
 }

@@ -32,7 +32,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralMa
     @IBOutlet var searchSwitch: UISwitch!
     @IBOutlet var usherLabel: UILabel!
     @IBOutlet var searchWheel: UIActivityIndicatorView!
-    
+    @IBOutlet var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +61,16 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralMa
         
     }
     
+    @IBAction func goToTicketList(sender: AnyObject) {
+        let vs: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("TicketList")
+        self.showViewController(vs as UIViewController, sender: vs)
+    }
+    
+    /*@IBAction func goToTicketList(sender: AnyObject) {
+        let vs: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("TicketList")
+        self.showViewController(vs as UIViewController, sender: vs)
+        
+    }*/
     @IBAction func generateNewTicketID(sender: AnyObject) {
         setRandomTicketID()
         refreshUI()
