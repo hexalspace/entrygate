@@ -10,7 +10,7 @@ import UIKit
 import CoreBluetooth
 import QuartzCore
 
-class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralManagerDelegate {
+class SelectedTicketViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralManagerDelegate {
     
     //BlueTooth standard UUIDs from developer.bluetooth.org/gatt/services/pages/ServicesHome.aspx
     let TM_FAN_DEVICE_INFO_SERVICE_UUID = CBUUID(string:"180A")
@@ -28,11 +28,21 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralMa
     var peripheralManager = CBPeripheralManager(delegate: nil, queue: nil)
 
     
+    var ticketName = "None"
+    var venue = "None"
+    var date = "0/0/0"
+    var seat = "None"
+    var id = "00000"
+    
+    @IBOutlet var ticketNameLabel: UILabel!
+    @IBOutlet var venueLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var seatLabel: UILabel!
     @IBOutlet var ticketIdLabel: UILabel!
+    
     @IBOutlet var searchSwitch: UISwitch!
     @IBOutlet var usherLabel: UILabel!
     @IBOutlet var searchWheel: UIActivityIndicatorView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +50,13 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralMa
         //peripheralManager = CBPeripheralManager(delegate self, queue: nil
         searchSwitch.setOn(false, animated:false)
         setupServices()
-        generateNewTicketID(self)
+        ticketNameLabel.text = ticketName
+        venueLabel.text = venue
+        dateLabel.text = date
+        seatLabel.text = seat
+        ticketIdLabel.text = id
+        searchButtonUpdated(self)
+        peripheralManagerDidUpdateState(peripheralManager)
 
     }
 
@@ -55,16 +71,11 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralMa
     }
     
     func refreshUI(){
-        self.ticketIdLabel.text = "Your ticket ID is \(ticketID)"
         searchButtonUpdated(self)
         peripheralManagerDidUpdateState(peripheralManager)
         
     }
     
-    @IBAction func generateNewTicketID(sender: AnyObject) {
-        setRandomTicketID()
-        refreshUI()
-    }
     @IBAction func searchButtonUpdated(sender: AnyObject) {
         if(searchSwitch.on){
             usherLabel.text = "Searching for nearby usher..."
