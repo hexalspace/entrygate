@@ -40,8 +40,11 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
     ]
     
+<<<<<<< HEAD
     var addedTickets: [CustomTableViewCell] = []
     
+=======
+>>>>>>> FETCH_HEAD
     func tableView(tableView:UITableView, numberOfRowsInSection section: Int)->Int{
         return self.possibleTickets.count
     }
@@ -49,13 +52,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell: CustomTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as CustomTableViewCell
         var(ticket, venue, date, location, id) = self.possibleTickets[indexPath.row]
+<<<<<<< HEAD
         cell.loadItem(ticketName: ticket, venueName: venue, eventDate: date, seatLocation: location, ticketID: id)
         addedTickets.append(cell)
+=======
+        println("Loading cell")
+        cell.loadItem(ticketName: ticket, venueName: venue, eventDate: date, seatLocation: location, ticketID: id)
+>>>>>>> FETCH_HEAD
         return cell
     }
     
     func tableView(tableView:UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         //println("You selected cell #\(indexPath.row)!")
+<<<<<<< HEAD
         //selectedCell =
         //let vs: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("ViewController")
         //self.showViewController(vs as UIViewController, sender: vs)
@@ -74,6 +83,12 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             newView.id = selectedCell.ticketID.text!
         }
     }
+=======
+        let vs: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("ViewController")
+        self.showViewController(vs as UIViewController, sender: vs)
+    }
+    
+>>>>>>> FETCH_HEAD
     /*func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numberOfTicketsToDisplay
     }*/

@@ -43,6 +43,10 @@ class SelectedTicketViewController: UIViewController, CBPeripheralManagerDelegat
     @IBOutlet var searchSwitch: UISwitch!
     @IBOutlet var usherLabel: UILabel!
     @IBOutlet var searchWheel: UIActivityIndicatorView!
+<<<<<<< HEAD:FanApp/FanApp/SelectedTicketViewController.swift
+=======
+    @IBOutlet var backButton: UIButton!
+>>>>>>> FETCH_HEAD:FanApp/FanApp/ViewController.swift
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +80,23 @@ class SelectedTicketViewController: UIViewController, CBPeripheralManagerDelegat
         
     }
     
+<<<<<<< HEAD:FanApp/FanApp/SelectedTicketViewController.swift
+=======
+    @IBAction func goToTicketList(sender: AnyObject) {
+        let vs: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("TicketList")
+        self.showViewController(vs as UIViewController, sender: vs)
+    }
+    
+    /*@IBAction func goToTicketList(sender: AnyObject) {
+        let vs: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("TicketList")
+        self.showViewController(vs as UIViewController, sender: vs)
+        
+    }*/
+    @IBAction func generateNewTicketID(sender: AnyObject) {
+        setRandomTicketID()
+        refreshUI()
+    }
+>>>>>>> FETCH_HEAD:FanApp/FanApp/ViewController.swift
     @IBAction func searchButtonUpdated(sender: AnyObject) {
         if(searchSwitch.on){
             usherLabel.text = "Searching for nearby usher..."
