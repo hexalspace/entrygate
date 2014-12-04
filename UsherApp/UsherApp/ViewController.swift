@@ -11,23 +11,36 @@ import QuartzCore
 
 class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
+    // Usher App Constants
+    let MAX_FANS = 9
+    let MAX_FAN_GROUPS = 1
+    let COL_VIEW_TOP_INSET  = 250
+    let COL_VIEW_BOTTOM_INSET = 0
+    let COL_VIEW_LEFT_INSET = 20
+    let COL_VIEW_RIGHT_INSET = 20
+    let COL_VIEW_CELL_SIZE = 90
+    
+    // UI Elements Added via Storyboard
+    @IBOutlet var scanSwitch : UISwitch!
+    @IBOutlet var ticketNumberLabel :UILabel!
+    @IBOutlet var collectionView : UICollectionView!
+
+    // Modifiable Class Elements
     var ticketNumber : UInt32 = 0
     var centralManager : CBCentralManager!
     var peripheralUser : CBPeripheral!
     
-    @IBOutlet var scanSwitch : UISwitch!
-    @IBOutlet var ticketNumberLabel :UILabel!
-    @IBOutlet var collectionView : UICollectionView!
-    
     //// UI Functions
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Initialize Bluetooth
         centralManager = CBCentralManager(delegate: self, queue:nil)
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // Initialize Collection View
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 250, left: 20, bottom: 150, right: 20)
-        layout.itemSize = CGSize(width: 90, height: 90)
+        layout.sectionInset = UIEdgeInsets(top: CGFloat(COL_VIEW_TOP_INSET), left: CGFloat(COL_VIEW_LEFT_INSET), bottom: CGFloat(COL_VIEW_BOTTOM_INSET), right: CGFloat(COL_VIEW_RIGHT_INSET))
+        layout.itemSize = CGSize(width: COL_VIEW_CELL_SIZE, height: COL_VIEW_CELL_SIZE)
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -53,9 +66,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         }
     }
     
-    @IBAction func tapView(sender : AnyObject){
-    }
-    
     func refreshUI(){
         ticketNumberLabel.text = "Ticker number: \(ticketNumber)"
     }
@@ -63,18 +73,17 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     //// Colection View Delegate
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CollectionViewCell", forIndexPath: indexPath) as CollectionViewCell
-        cell.backgroundColor = UIColor.blackColor()
+        cell.backgroundColor = UIColor.lightGrayColor()
         cell.textLabel?.text = "\(indexPath.section):\(indexPath.row)"
-        cell.imageView?.image = UIImage(named: "circle")
         return cell
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return MAX_FAN_GROUPS
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return MAX_FANS
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
@@ -84,9 +93,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     
-    
     //// CBDelegateManager Functions
-    
     func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
         centralManager.connectPeripheral(peripheral, options: nil)
     }
@@ -124,11 +131,10 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         }
     }
 
-    /// CBPeripheralDelegate Functions
-    
+    //// CBPeripheralDelegate Functions
     func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
         for service in peripheral.services {
-            peripheral.discoverCharacteristics([TM_USHER_CLIENT_COMMS_CHARACTERIC_TICKET, TM_USHER_CLIENT_COMMS_CHARACTERIC_STATUS], forService: service as CBService)
+            peripheral.discoverCharacteristics([TM_USHER_CLIENT_COMMS_CHARACTERIC_TICKET], forService: service as CBService)
         }
     }
     
