@@ -8,10 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9BA1097C1A2F766E0020307A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA1097B1A2F766E0020307A /* TableViewController.swift */; };
-<<<<<<< HEAD
 		9BA228691A31172900A230BF /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA228681A31172900A230BF /* InitialViewController.swift */; };
-=======
->>>>>>> FETCH_HEAD
 		9BC9A8111A23B6B3007AD0FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9A8101A23B6B3007AD0FC /* AppDelegate.swift */; };
 		9BC9A8131A23B6B3007AD0FC /* SelectedTicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9A8121A23B6B3007AD0FC /* SelectedTicketViewController.swift */; };
 		9BC9A8161A23B6B3007AD0FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BC9A8141A23B6B3007AD0FC /* Main.storyboard */; };
@@ -32,10 +29,7 @@
 
 /* Begin PBXFileReference section */
 		9BA1097B1A2F766E0020307A /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		9BA228681A31172900A230BF /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
-=======
->>>>>>> FETCH_HEAD
 		9BC9A80B1A23B6B3007AD0FC /* FanApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FanApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BC9A80F1A23B6B3007AD0FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BC9A8101A23B6B3007AD0FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,10 +81,7 @@
 		9BC9A80D1A23B6B3007AD0FC /* FanApp */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				9BA228681A31172900A230BF /* InitialViewController.swift */,
-=======
->>>>>>> FETCH_HEAD
 				9BA1097B1A2F766E0020307A /* TableViewController.swift */,
 				9BC9A8101A23B6B3007AD0FC /* AppDelegate.swift */,
 				9BC9A8121A23B6B3007AD0FC /* SelectedTicketViewController.swift */,
