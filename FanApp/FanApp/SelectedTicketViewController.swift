@@ -39,10 +39,15 @@ class SelectedTicketViewController: UIViewController, CBPeripheralManagerDelegat
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var seatLabel: UILabel!
     @IBOutlet var ticketIdLabel: UILabel!
+    @IBOutlet var connectedLabel: UILabel!
+    @IBOutlet var pleaseShowLabel: UILabel!
     
+    @IBOutlet var colorView: UIView!
     @IBOutlet var searchSwitch: UISwitch!
     @IBOutlet var usherLabel: UILabel!
     @IBOutlet var searchWheel: UIActivityIndicatorView!
+    
+    var possibleColors = [UIColor.redColor(), UIColor.magentaColor(), UIColor.blueColor(), UIColor.cyanColor(), UIColor.greenColor(), UIColor.yellowColor(), UIColor.blackColor(), UIColor.orangeColor(), UIColor.grayColor(), UIColor.brownColor(), UIColor.purpleColor()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +60,8 @@ class SelectedTicketViewController: UIViewController, CBPeripheralManagerDelegat
         dateLabel.text = date
         seatLabel.text = seat
         ticketIdLabel.text = id
+        connectedLabel.hidden = true
+        pleaseShowLabel.hidden = true
         searchButtonUpdated(self)
         peripheralManagerDidUpdateState(peripheralManager)
 
@@ -70,6 +77,25 @@ class SelectedTicketViewController: UIViewController, CBPeripheralManagerDelegat
         peripheralManager.addService(CBMutableService(type: TM_FAN_DEVICE_INFO_SERVICE_UUID, primary: false))
     }
     
+    func sucessfulConnection(){
+        colorView.backgroundColor = possibleColors[Int(arc4random_uniform(UInt32(possibleColors.count)))]
+        searchSwitch.hidden = true
+        usherLabel.hidden = true
+        searchWheel.stopAnimating()
+        searchWheel.hidden = true
+        
+        connectedLabel.hidden = false
+        pleaseShowLabel.hidden = false
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("ticketValidated"), userInfo: nil, repeats: false)
+        
+    }
+    
+    func ticketValidated(){
+        self.performSegueWithIdentifier("successSegue", sender: self)
+        
+    }
+    
     func refreshUI(){
         searchButtonUpdated(self)
         peripheralManagerDidUpdateState(peripheralManager)
@@ -81,6 +107,7 @@ class SelectedTicketViewController: UIViewController, CBPeripheralManagerDelegat
             usherLabel.text = "Searching for nearby usher..."
             searchWheel.startAnimating()
             searchWheel.hidden = false
+            var timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("sucessfulConnection"), userInfo: nil, repeats: false)
         }
         else{
             usherLabel.text = "Search for usher"
