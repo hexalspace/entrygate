@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreBluetooth
 
 class CollectionViewCell: UICollectionViewCell {
     
@@ -19,8 +20,10 @@ class CollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView!
 
     var ticketNumber : Int
+    var peripheral : CBPeripheral?
 
     override init(frame: CGRect) {
+        self.peripheral = nil
         self.ticketNumber = 99
         super.init(frame: frame)
         

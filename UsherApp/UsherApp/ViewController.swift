@@ -27,6 +27,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
 
     // Modifiable Class Elements
     var ticketNumber : UInt32 = 0
+    var nextCell : Int = 0
     var centralManager : CBCentralManager!
     var peripheralUser : CBPeripheral!
     
@@ -47,6 +48,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         collectionView.registerClass(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
         collectionView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView)
+
+        refreshUI()
     }
     
     override func didReceiveMemoryWarning(){
@@ -95,14 +98,43 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     //// CBDelegateManager Functions
     func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
-        centralManager.connectPeripheral(peripheral, options: nil)
+        if (nextCell < MAX_FANS-1){
+            centralManager.connectPeripheral(peripheral, options: nil)
+        }
     }
     
     func centralManager(central: CBCentralManager!, didConnectPeripheral peripheral: CBPeripheral!) {
         peripheral.delegate = self
         println("Connected to discovered peripheral: \(peripheral.name)")
-        // May not be needed since we know what service to expect here
+        if (nextCell < MAX_FANS-1){
+            var cell : CollectionViewCell = collectionView.visibleCells()[nextCell] as CollectionViewCell
+            cell.peripheral = peripheral
+            cell.backgroundColor = UIColor.blueColor()
+            nextCell++
+        }
+
         peripheral.discoverServices([TM_USHER_CLIENT_COMMS_SERVICE])
+    }
+
+    func centralManager(central: CBCentralManager!, didDisconnectPeripheral peripheral: CBPeripheral!, error: NSError!) {
+        for i in 0...MAX_FANS-1 {
+            if (i != MAX_FANS-1){
+                var cell = collectionView.visibleCells()[i] as CollectionViewCell
+                var nextCell = collectionView.visibleCells()[i+1] as CollectionViewCell
+                if (cell.peripheral == nil){
+                    cell.peripheral = nextCell.peripheral
+                    cell.backgroundColor = UIColor.blueColor()
+                    nextCell.peripheral = nil
+                    nextCell.backgroundColor = UIColor.lightGrayColor()
+                }
+            }
+            else {
+                var cell = collectionView.visibleCells()[i] as CollectionViewCell
+                cell.backgroundColor = UIColor.blueColor()
+            }
+        }
+        nextCell--
+        refreshUI()
     }
     
     func centralManagerDidUpdateState(central: CBCentralManager!) {
@@ -150,6 +182,5 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             refreshUI()
         }
     }
-    
 }
 
