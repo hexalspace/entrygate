@@ -13,8 +13,8 @@ class SuccessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.view.backgroundColor = UIColor.blueColor()
         
     }
+    
     
 }

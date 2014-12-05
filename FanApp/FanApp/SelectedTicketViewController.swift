@@ -47,7 +47,7 @@ class SelectedTicketViewController: UIViewController, CBPeripheralManagerDelegat
     @IBOutlet var usherLabel: UILabel!
     @IBOutlet var searchWheel: UIActivityIndicatorView!
     
-    var possibleColors = [UIColor.redColor(), UIColor.magentaColor(), UIColor.blueColor(), UIColor.cyanColor(), UIColor.greenColor(), UIColor.yellowColor(), UIColor.blackColor(), UIColor.orangeColor(), UIColor.grayColor(), UIColor.brownColor(), UIColor.purpleColor()]
+    var possibleColors = [UIColor.redColor(), UIColor.magentaColor(), UIColor.blueColor(), UIColor.cyanColor(), UIColor.greenColor(), UIColor.yellowColor(), UIColor.blackColor(), UIColor.orangeColor(), UIColor.grayColor(), UIColor.purpleColor()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,13 +104,14 @@ class SelectedTicketViewController: UIViewController, CBPeripheralManagerDelegat
     
     @IBAction func searchButtonUpdated(sender: AnyObject) {
         if(searchSwitch.on){
-            usherLabel.text = "Searching for nearby usher..."
+            //usherLabel.text = "Searching for nearby usher..."
+            usherLabel.hidden = true
             searchWheel.startAnimating()
             searchWheel.hidden = false
             var timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("sucessfulConnection"), userInfo: nil, repeats: false)
         }
         else{
-            usherLabel.text = "Search for usher"
+            usherLabel.hidden = false
             searchWheel.stopAnimating()
             searchWheel.hidden = true
         }
@@ -148,6 +149,16 @@ class SelectedTicketViewController: UIViewController, CBPeripheralManagerDelegat
         
         
     }
+    
+    
+    @IBAction func helpPressed(sender: AnyObject) {
+        var alert: UIAlertView = UIAlertView()
+        alert.title = "Help"
+        alert.message = "Tap the switch above \"Search for Usher\" to search for an usher to validate your ticket. Connection wil be handled automatically"
+        alert.addButtonWithTitle("Ok")
+        alert.show()
+    }
+    
 
 
 }

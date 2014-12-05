@@ -48,7 +48,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     let numberOfTicketsToDisplay = 2
     
     func tableView(tableView:UITableView, numberOfRowsInSection section: Int)->Int{
-        return 2
+        return numberOfTicketsToDisplay
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
@@ -77,10 +77,18 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
 
+    @IBAction func helpPressed(sender: AnyObject) {
+        var alert: UIAlertView = UIAlertView()
+        alert.title = "Help"
+        alert.message = "Tap a ticket from the list below to continue"
+        alert.addButtonWithTitle("Ok")
+        alert.show()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
+    
     
 }

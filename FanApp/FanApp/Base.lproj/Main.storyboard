@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--ViewController-->
+        <!--Selected Ticket-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" title="ViewController" id="BYZ-38-t0r" customClass="SelectedTicketViewController" customModule="FanApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="SelectedTicketViewController" customModule="FanApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,25 +20,18 @@
                                 </connections>
                             </switch>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="ecw-76-mgV">
-                                <rect key="frame" x="149" y="265" width="20" height="20"/>
+                                <rect key="frame" x="150" y="237" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue: Boelter Dungeon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G4w-SQ-I98">
-                                <rect key="frame" x="16" y="105" width="186" height="21"/>
+                                <rect key="frame" x="16" y="105" width="293" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date: 12/19/2014" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cuz-Bi-jGx">
-                                <rect key="frame" x="16" y="120" width="134" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section 1 Row 1 Seat 10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RoS-aq-Caw">
-                                <rect key="frame" x="16" y="135" width="190" height="21"/>
+                                <rect key="frame" x="16" y="120" width="288" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -63,21 +56,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for Usher " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hl1-Gl-MTC">
-                                <rect key="frame" x="25" y="236" width="269" height="21"/>
+                                <rect key="frame" x="90" y="236" width="269" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your ticket ID is: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Wid-Vx-cie">
-                                <rect key="frame" x="8" y="160" width="268" height="21"/>
+                                <rect key="frame" x="8" y="164" width="268" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="yAH-HH-iO8">
-                                <rect key="frame" x="0.0" y="236" width="320" height="332"/>
+                                <rect key="frame" x="-1" y="236" width="321" height="332"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please show your screen to the nearest usher" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0U2-bS-Wpn">
@@ -94,6 +87,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section 1 Row 1 Seat 10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RoS-aq-Caw">
+                                <rect key="frame" x="16" y="135" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -103,11 +103,12 @@
                     <navigationItem key="navigationItem" title="Selected Ticket" id="ReS-E2-m9z">
                         <barButtonItem key="rightBarButtonItem" title="Help" id="PvV-g4-U8a">
                             <connections>
-                                <segue destination="BNt-cq-mV2" kind="modal" identifier="successSegue" id="Ras-J5-Jt9"/>
+                                <action selector="helpPressed:" destination="BYZ-38-t0r" id="HkM-pd-xJH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="colorView" destination="yAH-HH-iO8" id="OVn-ET-L2i"/>
                         <outlet property="connectedLabel" destination="IIo-5P-jgh" id="VSd-m8-vXt"/>
@@ -120,6 +121,7 @@
                         <outlet property="ticketNameLabel" destination="IgV-Vw-1vO" id="bN8-0K-k6f"/>
                         <outlet property="usherLabel" destination="hl1-Gl-MTC" id="nv6-ey-KCn"/>
                         <outlet property="venueLabel" destination="G4w-SQ-I98" id="E7f-Q3-l9O"/>
+                        <segue destination="BNt-cq-mV2" kind="modal" identifier="successSegue" id="sxn-tY-yNs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -179,6 +181,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2t8-yW-0LI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -212,6 +215,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="purchaseTicketsPressed:" destination="TS8-Rm-NoB" eventType="touchUpInside" id="NT3-xi-CXr"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scene-light-hands-concert.jpg" id="r4m-ua-0Bt">
                                 <rect key="frame" x="40" y="133" width="240" height="128"/>
@@ -234,13 +240,21 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="myAccountPressed:" destination="TS8-Rm-NoB" eventType="touchUpInside" id="rBe-oo-KDh"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.43389842537478807" green="0.57578201782313454" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="pCN-zl-2Ay">
-                        <barButtonItem key="rightBarButtonItem" title="Help" id="ZDP-9C-vTQ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="ZDP-9C-vTQ">
+                            <connections>
+                                <action selector="helpPressed:" destination="TS8-Rm-NoB" id="yzC-T8-dSD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="intialImage" destination="r4m-ua-0Bt" id="igC-ha-iPy"/>
                         <outlet property="myAccountLabel" destination="eoU-o3-ArO" id="C1c-Cx-ujn"/>
@@ -325,8 +339,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Tickets" id="95X-Zg-5ey">
-                        <barButtonItem key="rightBarButtonItem" title="Help" id="QvO-bK-Ulh"/>
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="QvO-bK-Ulh">
+                            <connections>
+                                <action selector="helpPressed:" destination="3Q6-nf-gei" id="Q21-8z-tb2"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="Dsi-R6-qdF" id="J14-rs-tfm"/>
                         <segue destination="BYZ-38-t0r" kind="push" identifier="TicketSelected" id="1x8-2J-8Dd"/>
