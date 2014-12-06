@@ -14,20 +14,23 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     // Usher App Constants
     let MAX_FANS = 9
     let MAX_FAN_GROUPS = 1
-    let COL_VIEW_TOP_INSET  = 250
+    let COL_VIEW_TOP_INSET  = 150
     let COL_VIEW_BOTTOM_INSET = 0
     let COL_VIEW_LEFT_INSET = 20
     let COL_VIEW_RIGHT_INSET = 20
     let COL_VIEW_CELL_SIZE = 90
+    let DEBUG_VIEW_MAX_LINES = 8
     
     // UI Elements Added via Storyboard
     @IBOutlet var scanSwitch : UISwitch!
     @IBOutlet var ticketNumberLabel :UILabel!
+    @IBOutlet var debugTextView : UITextView!
     @IBOutlet var collectionView : UICollectionView!
 
     // Modifiable Class Elements
     var ticketNumber : UInt32 = 0
     var nextCell : Int = 0
+    var debugCount  = 0
     var centralManager : CBCentralManager!
     var peripheralUser : CBPeripheral!
     
@@ -49,6 +52,10 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         collectionView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView)
 
+        if (DEBUG){
+            debugTextView.text = "Debug Log:"
+        }
+
         refreshUI()
     }
     
@@ -61,16 +68,31 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         if (scanSwitch.on){
             let services = [TM_USHER_CLIENT_COMMS_SERVICE]
             centralManager.scanForPeripheralsWithServices(services, options: nil)
-            println("Scan started")
+            debugPrint("Scan started")
         }
         else{
             centralManager.stopScan()
-            println("Scan stopped")
+            debugPrint("Scan stopped")
         }
     }
     
     func refreshUI(){
         ticketNumberLabel.text = "Ticker number: \(ticketNumber)"
+    }
+
+    func debugPrint(text : String){
+        if (DEBUG){
+            if (debugCount > DEBUG_VIEW_MAX_LINES){
+                debugTextView.text = "Debug Log:" + "\n>  " + text
+                debugCount = 0
+            }
+            else {
+                debugTextView.text = debugTextView.text! + "\n>  " + text
+                debugCount++
+            }
+
+        }
+        println(text)
     }
     
     //// Colection View Delegate
@@ -92,7 +114,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         var current : CollectionViewCell
         current = collectionView.cellForItemAtIndexPath(indexPath)! as CollectionViewCell
-        println("Selected: \(current.ticketNumber)");
+        debugPrint("Selected: \(current.ticketNumber)");
     }
     
     
@@ -105,7 +127,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     func centralManager(central: CBCentralManager!, didConnectPeripheral peripheral: CBPeripheral!) {
         peripheral.delegate = self
-        println("Connected to discovered peripheral: \(peripheral.name)")
+        debugPrint("Connected to discovered peripheral: \(peripheral.name)")
         if (nextCell < MAX_FANS-1){
             var cell : CollectionViewCell = collectionView.visibleCells()[nextCell] as CollectionViewCell
             cell.peripheral = peripheral
@@ -140,25 +162,25 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     func centralManagerDidUpdateState(central: CBCentralManager!) {
         switch centralManager.state {
         case .PoweredOff:
-            println("Bluetooth is powered off")
+            debugPrint("Bluetooth is powered off")
             break
         case .PoweredOn:
-            println("Bluetooth is powered on")
+            debugPrint("Bluetooth is powered on")
             break
         case .Resetting:
-            println("Bluetooth is currently resetting")
+            debugPrint("Bluetooth is currently resetting")
             break
         case .Unauthorized:
-            println("Bluetooth access is unauthorized")
+            debugPrint("Bluetooth access is unauthorized")
             break
         case .Unknown:
-            println("Bluetooth status is unknown")
+            debugPrint("Bluetooth status is unknown")
             break
         case .Unsupported:
-            println("Bluetooth is not supported on this device")
+            debugPrint("Bluetooth is not supported on this device")
             break
         default:
-            println("Device is a potato")
+            debugPrint("Device is a potato")
             break
         }
     }
