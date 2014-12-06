@@ -12,6 +12,7 @@ import CoreBluetooth
 class CollectionViewCell: UICollectionViewCell {
     
     required init(coder aDecoder: NSCoder) {
+        self.active = false
         self.ticketNumber = 99
         super.init(coder: aDecoder)
     }
@@ -21,8 +22,10 @@ class CollectionViewCell: UICollectionViewCell {
 
     var ticketNumber : Int
     var peripheral : CBPeripheral?
+    var active : Bool
 
     override init(frame: CGRect) {
+        self.active = false
         self.peripheral = nil
         self.ticketNumber = 99
         super.init(frame: frame)
