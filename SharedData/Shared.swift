@@ -12,7 +12,7 @@ let TM_USHER_CLIENT_COMMS_CHARACTERIC_TICKET = CBUUID(string: "C04761A0-51E9-465
 let TM_USHER_CLIENT_COMMS_CHARACTERIC_STATUS = CBUUID(string: "47F5C171-619F-4B3B-A983-36066CAC1ACC")
 
 let DEBUG = true
-let TEST = true
+let TEST = false
 
 func dataToInt(theData : NSData) -> UInt32 {
     var theInteger : UInt32 = 0
