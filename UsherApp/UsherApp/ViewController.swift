@@ -52,9 +52,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         collectionView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView)
 
-        if (DEBUG){
-            // Add debug test buttons
-            debugTextView.text = "Debug Log:"
+        if (TEST){
+            // Add test buttons
             var b1 = UIButton.buttonWithType(UIButtonType.System) as UIButton
             b1.frame = CGRectMake(0, 0, 100, 50)
             b1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
@@ -74,7 +73,9 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             self.view.addSubview(b2)
         }
 
-        refreshUI()
+        if (DEBUG){
+             debugTextView.text = "Debug Log:"
+        }
     }
     
     override func didReceiveMemoryWarning(){
