@@ -11,29 +11,71 @@ import QuartzCore
 
 class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
+    // Usher App Constants
+    let MAX_FANS = 9
+    let MAX_FAN_GROUPS = 1
+    let COL_VIEW_TOP_INSET  = 150
+    let COL_VIEW_BOTTOM_INSET = 0
+    let COL_VIEW_LEFT_INSET = 20
+    let COL_VIEW_RIGHT_INSET = 20
+    let COL_VIEW_CELL_SIZE = 90
+    let DEBUG_VIEW_MAX_LINES = 8
+    
+    // UI Elements Added via Storyboard
+    @IBOutlet var scanSwitch : UISwitch!
+    @IBOutlet var ticketNumberLabel :UILabel!
+    @IBOutlet var debugTextView : UITextView!
+    @IBOutlet var collectionView : UICollectionView!
+
+    // Modifiable Class Elements
     var ticketNumber : UInt32 = 0
+    var nextCell : Int = 0
+    var debugCount  = 0
     var centralManager : CBCentralManager!
     var peripheralUser : CBPeripheral!
     
-    @IBOutlet var scanSwitch : UISwitch!
-    @IBOutlet var ticketNumberLabel :UILabel!
-    @IBOutlet var collectionView : UICollectionView!
-    
     //// UI Functions
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Initialize Bluetooth
         centralManager = CBCentralManager(delegate: self, queue:nil)
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // Initialize Collection View
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 250, left: 20, bottom: 150, right: 20)
-        layout.itemSize = CGSize(width: 90, height: 90)
+        layout.sectionInset = UIEdgeInsets(top: CGFloat(COL_VIEW_TOP_INSET), left: CGFloat(COL_VIEW_LEFT_INSET), bottom: CGFloat(COL_VIEW_BOTTOM_INSET), right: CGFloat(COL_VIEW_RIGHT_INSET))
+        layout.itemSize = CGSize(width: COL_VIEW_CELL_SIZE, height: COL_VIEW_CELL_SIZE)
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.registerClass(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
         collectionView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView)
+
+        if (TEST){
+            // Add test buttons
+            var b1 = UIButton.buttonWithType(UIButtonType.System) as UIButton
+            b1.frame = CGRectMake(0, 0, 100, 50)
+            b1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+            b1.setTitle("addFakePeriperhal", forState: UIControlState.Normal)
+            b1.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+            b1.addTarget(self, action: "addFakePeriperhal:", forControlEvents: UIControlEvents.TouchUpInside)
+            b1.backgroundColor = UIColor.lightGrayColor()
+            self.view.addSubview(b1)
+
+            var b2 = UIButton.buttonWithType(UIButtonType.System) as UIButton
+            b2.setTitle("refreshPeripheralState", forState: UIControlState.Normal)
+            b2.frame = CGRectMake(0, 50, 100, 50)
+            b2.imageEdgeInsets = UIEdgeInsets(top: 60, left: 20, bottom: 0, right: 0)
+            b2.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+            b2.addTarget(self, action: "refreshPeripheralState:", forControlEvents: UIControlEvents.TouchUpInside)
+            b2.backgroundColor = UIColor.lightGrayColor()
+            self.view.addSubview(b2)
+        }
+
+        if (DEBUG){
+             debugTextView.text = "Debug Log:"
+        }
     }
     
     override func didReceiveMemoryWarning(){
@@ -45,84 +87,146 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         if (scanSwitch.on){
             let services = [TM_USHER_CLIENT_COMMS_SERVICE]
             centralManager.scanForPeripheralsWithServices(services, options: nil)
-            println("Scan started")
+            debugPrint("Scan for peripherals started")
         }
         else{
             centralManager.stopScan()
-            println("Scan stopped")
+            debugPrint("Scan for peripherals stopped")
         }
-    }
-    
-    @IBAction func tapView(sender : AnyObject){
     }
     
     func refreshUI(){
         ticketNumberLabel.text = "Ticker number: \(ticketNumber)"
     }
+
+    func debugPrint(text : String){
+        if (DEBUG){
+            if (debugCount > DEBUG_VIEW_MAX_LINES){
+                debugTextView.text = "Debug Log:" + "\n>  " + text
+                debugCount = 0
+            }
+            else {
+                debugTextView.text = debugTextView.text! + "\n>  " + text
+                debugCount++
+            }
+
+        }
+        println(text)
+    }
     
     //// Colection View Delegate
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CollectionViewCell", forIndexPath: indexPath) as CollectionViewCell
-        cell.backgroundColor = UIColor.blackColor()
+        cell.backgroundColor = UIColor.lightGrayColor()
         cell.textLabel?.text = "\(indexPath.section):\(indexPath.row)"
-        cell.imageView?.image = UIImage(named: "circle")
         return cell
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return MAX_FAN_GROUPS
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return MAX_FANS
+    }
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
+        var cell = collectionView.cellForItemAtIndexPath(indexPath) as CollectionViewCell
+        debugPrint("Selected: \(cell.ticketNumber)");
+
+        cell.active = false
+        cell.peripheral = nil
+        cell.backgroundColor = UIColor.lightGrayColor()
     }
     
     
-    
     //// CBDelegateManager Functions
-    
     func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
-        centralManager.connectPeripheral(peripheral, options: nil)
+        if (nextCell < MAX_FANS-1){
+            centralManager.connectPeripheral(peripheral, options: nil)
+        }
     }
     
     func centralManager(central: CBCentralManager!, didConnectPeripheral peripheral: CBPeripheral!) {
         peripheral.delegate = self
-        println("Connected to discovered peripheral: \(peripheral.name)")
-        // May not be needed since we know what service to expect here
+        debugPrint("Connected to discovered peripheral: \(peripheral.name)")
+        if (nextCell < MAX_FANS){
+            var indexPath = NSIndexPath(forRow: nextCell, inSection: 0)
+            var cell = collectionView.cellForItemAtIndexPath(indexPath) as CollectionViewCell
+            cell.peripheral = peripheral
+            cell.backgroundColor = UIColor.blueColor()
+            nextCell++
+        }
+
         peripheral.discoverServices([TM_USHER_CLIENT_COMMS_SERVICE])
+    }
+
+    func centralManager(central: CBCentralManager!, didDisconnectPeripheral peripheral: CBPeripheral!, error: NSError!) {
+
+        var j = 0
+
+        // Invalidate disconnected peripheral
+        for i in 0...MAX_FANS-1 {
+            var curPath = NSIndexPath(forRow: i, inSection: 0)
+            var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
+            if (cell.peripheral == peripheral){
+                cell.active = false
+                cell.peripheral = nil
+                j = i
+            }
+        }
+
+        // Shift other peripherals up
+        for i in j...MAX_FANS-1 {
+            var curPath = NSIndexPath(forRow: i, inSection: 0)
+            var nextPath = NSIndexPath(forRow: i+1, inSection: 0)
+            if (i != MAX_FANS-1){
+                var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
+                var adjCell = collectionView.cellForItemAtIndexPath(nextPath) as CollectionViewCell
+                cell.active = adjCell.active
+                cell.peripheral = adjCell.peripheral
+                cell.backgroundColor = adjCell.backgroundColor
+            }
+            else {
+                var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
+                cell.active = false
+                cell.peripheral = nil
+                cell.backgroundColor = UIColor.lightGrayColor()
+            }
+        }
+        nextCell--
     }
     
     func centralManagerDidUpdateState(central: CBCentralManager!) {
         switch centralManager.state {
         case .PoweredOff:
-            println("Bluetooth is powered off")
+            debugPrint("Bluetooth is powered off")
             break
         case .PoweredOn:
-            println("Bluetooth is powered on")
+            debugPrint("Bluetooth is powered on")
             break
         case .Resetting:
-            println("Bluetooth is currently resetting")
+            debugPrint("Bluetooth is currently resetting")
             break
         case .Unauthorized:
-            println("Bluetooth access is unauthorized")
+            debugPrint("Bluetooth access is unauthorized")
             break
         case .Unknown:
-            println("Bluetooth status is unknown")
+            debugPrint("Bluetooth status is unknown")
             break
         case .Unsupported:
-            println("Bluetooth is not supported on this device")
+            debugPrint("Bluetooth is not supported on this device")
             break
         default:
-            println("Device is a potato")
+            debugPrint("Device is a potato")
             break
         }
     }
-    
-    /// CBPeripheralDelegate Functions
-    
+
+    //// CBPeripheralDelegate Functions
     func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
         for service in peripheral.services {
-            peripheral.discoverCharacteristics([TM_USHER_CLIENT_COMMS_CHARACTERIC_TICKET, TM_USHER_CLIENT_COMMS_CHARACTERIC_STATUS], forService: service as CBService)
+            peripheral.discoverCharacteristics([TM_USHER_CLIENT_COMMS_CHARACTERIC_TICKET], forService: service as CBService)
         }
     }
     
@@ -138,6 +242,40 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             refreshUI()
         }
     }
-    
+
+    //// Testing Functions
+    @IBAction func addFakePeriperhal(sender: AnyObject){
+        if (nextCell < MAX_FANS){
+            var indexPath = NSIndexPath(forRow: nextCell, inSection: 0)
+            var cell = collectionView.cellForItemAtIndexPath(indexPath) as CollectionViewCell
+            cell.peripheral = nil
+            cell.backgroundColor = UIColor.blueColor()
+            nextCell++
+        }
+    }
+
+    @IBAction func refreshPeripheralState(sender: AnyObject){
+        var j = 0
+
+        // Shift other peripherals up
+        for i in j...MAX_FANS-1 {
+            var curPath = NSIndexPath(forRow: i, inSection: 0)
+            var nextPath = NSIndexPath(forRow: i+1, inSection: 0)
+            if (i != MAX_FANS-1){
+                var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
+                var adjCell = collectionView.cellForItemAtIndexPath(nextPath) as CollectionViewCell
+                cell.active = adjCell.active
+                cell.peripheral = adjCell.peripheral
+                cell.backgroundColor = adjCell.backgroundColor
+            }
+            else {
+                var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
+                cell.active = false
+                cell.peripheral = nil
+                cell.backgroundColor = UIColor.lightGrayColor()
+            }
+        }
+        nextCell--
+    }
 }
 
