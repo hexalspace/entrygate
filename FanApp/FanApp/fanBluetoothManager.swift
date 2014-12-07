@@ -1,5 +1,5 @@
 //
-//  fanBluetoothManager.swift
+//  FanBluetoothManager.swift
 //  FanApp
 //
 //  Created by Ryan Dall on 12/6/14.
@@ -10,7 +10,7 @@ import UIKit
 import CoreBluetooth
 import QuartzCore
 
-class fanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
+class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
     
     let TM_FAN_CLIENT_COMMS_SERVICE = CBUUID(string: "2DBB2280-ACD5-4FCB-ABE5-A465AA69BACC")
     let TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC = CBUUID(string: "F300A4A9-C79A-4179-946D-35664899C9FE")
@@ -128,7 +128,8 @@ class fanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
     }
     
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager!) {
-        switch peripheralManager.state {
+        switch peripheralManager.state
+        {
         case .PoweredOff:
             println("Bluetooth is powered off")
             break

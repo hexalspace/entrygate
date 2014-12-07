@@ -95,7 +95,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "27"
             endingLineNumber = "27"
-            landmarkName = "fanBluetoothManager"
+            landmarkName = "FanBluetoothManager"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>

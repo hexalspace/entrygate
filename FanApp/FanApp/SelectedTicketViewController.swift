@@ -15,7 +15,7 @@ class SelectedTicketViewController: UIViewController/*, CBPeripheralManagerDeleg
     let DEMO_MODE = true
     
     //Parameters should be self, nil. Not working without nil, nil
-    var bluetoothManager : fanBluetoothManager!
+    var bluetoothManager : FanBluetoothManager!
 
     
     var ticketName = "None"
@@ -56,7 +56,7 @@ class SelectedTicketViewController: UIViewController/*, CBPeripheralManagerDeleg
         searchButtonUpdated(self)
         
         //Set up views bluetooth backend
-        bluetoothManager = fanBluetoothManager(view: self, eventName: ticketName, ticketID: id)
+        bluetoothManager = FanBluetoothManager(view: self, eventName: ticketName, ticketID: id)
 
     }
 

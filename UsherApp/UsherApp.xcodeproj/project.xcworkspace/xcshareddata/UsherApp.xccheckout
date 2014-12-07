@@ -18,7 +18,7 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>49DF288D47A166953AD9C6E171DC24E42B0D65AD</key>
-		<string>../../../../../entrygate</string>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/jsjwooowooo/entrygate.git</string>
