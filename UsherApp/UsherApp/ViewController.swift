@@ -239,6 +239,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     }
 
     func peripheral(peripheral: CBPeripheral!, didWriteValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
+        var cell : CollectionViewCell = getCell(peripheral)!
         var charName : String = ""
         switch characteristic.UUID {
             case TM_FAN_CLIENT_VALIDATION_COLOR_CHARACTERISTIC:
@@ -260,6 +261,9 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
 
             if (charName == "TICKET_VALIDATED"){
                 removePeripheral(peripheral)
+            }
+            else if (charName == "VALIDATION_COLOR"){
+                cell.recievedValidatedColor = true
             }
         }
     }
