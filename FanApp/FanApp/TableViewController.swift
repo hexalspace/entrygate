@@ -37,7 +37,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         ("David and the Potatoes", "Nowhere, KN", "07/5/2024", "Section 10, Row 100, Seat 2", "54321"),
         ("You've Probably Never Head of Them Anyway", "Local coffee shop", "12/6/2014", "Sit anywhere", "12985"),
         ("The Artist Formally Known as \'Eggert\'", "Staples Center", "3/3/15", "Section 4, Row 9, Seat 15", "31415"),
-        ("UCLA Marching Band with John Wiliams *hint hint*", "Hollywood Bowl", "11/15/15", "Section 9, Row 6, Seat 20", "92129"),
         ("The Nibblers - Keep on Nibbing Tour", "Rose Bowl", "Tomorrow", "Section 6A, Row 1, Seat nib", "82754"),
         ("Rolling Stones - 200 and Counting Tour", "Pauley Space Station Pavillion", "4/18/2163", "Backstage Access", "82653"),
         ("The 100th Turing Awards - Noah Duncan Hosting", "Dolby Theatre", "6/17/2066", "Row 1 Seat 1", "01101")

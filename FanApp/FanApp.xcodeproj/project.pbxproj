@@ -18,6 +18,7 @@
 		9BC9A8181A23B6B3007AD0FC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BC9A8171A23B6B3007AD0FC /* Images.xcassets */; };
 		9BC9A81B1A23B6B3007AD0FC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC9A8191A23B6B3007AD0FC /* LaunchScreen.xib */; };
 		9BC9A8271A23B6B3007AD0FC /* FanAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9A8261A23B6B3007AD0FC /* FanAppTests.swift */; };
+		9BD8E9AF1A33CBC4000EEF43 /* fanBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD8E9AE1A33CBC4000EEF43 /* fanBluetoothManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		9BC9A8201A23B6B3007AD0FC /* FanAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FanAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BC9A8251A23B6B3007AD0FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BC9A8261A23B6B3007AD0FC /* FanAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanAppTests.swift; sourceTree = "<group>"; };
+		9BD8E9AE1A33CBC4000EEF43 /* fanBluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fanBluetoothManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			children = (
 				9BA228681A31172900A230BF /* InitialViewController.swift */,
 				9BA1097B1A2F766E0020307A /* TableViewController.swift */,
+				9BD8E9AE1A33CBC4000EEF43 /* fanBluetoothManager.swift */,
 				9BC9A8121A23B6B3007AD0FC /* SelectedTicketViewController.swift */,
 				9B3231EB1A3144BF008CFCCC /* SuccessViewController.swift */,
 				9BC9A8101A23B6B3007AD0FC /* AppDelegate.swift */,
@@ -232,6 +235,7 @@
 			files = (
 				9BC9A8131A23B6B3007AD0FC /* SelectedTicketViewController.swift in Sources */,
 				9BA1097C1A2F766E0020307A /* TableViewController.swift in Sources */,
+				9BD8E9AF1A33CBC4000EEF43 /* fanBluetoothManager.swift in Sources */,
 				9BC9A8111A23B6B3007AD0FC /* AppDelegate.swift in Sources */,
 				9B3231EC1A3144BF008CFCCC /* SuccessViewController.swift in Sources */,
 				9BA228691A31172900A230BF /* InitialViewController.swift in Sources */,
@@ -364,6 +368,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5a4c4a06-023d-4f1f-9925-e7eea2ff82e9";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -376,6 +381,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5a4c4a06-023d-4f1f-9925-e7eea2ff82e9";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
