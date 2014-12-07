@@ -20,15 +20,19 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     let COL_VIEW_RIGHT_INSET = 20
     let COL_VIEW_CELL_SIZE = 90
     let DEBUG_VIEW_MAX_LINES = 8
+
+    let screenWidth = UIScreen.mainScreen().bounds.width
+    let screenHeight = UIScreen.mainScreen().bounds.height
     
     // UI Elements Added via Storyboard
     @IBOutlet var scanSwitch : UISwitch!
     @IBOutlet var ticketNumberLabel :UILabel!
-    @IBOutlet var debugTextView : UITextView!
     @IBOutlet var collectionView : UICollectionView!
 
     // Modifiable Class Elements
-    var ticketNumber : UInt32 = 0
+    var debugTextView : UITextView!
+    var ticketNumber : String = ""
+    var eventID : String = ""
     var nextCell : Int = 0
     var debugCount  = 0
     var centralManager : CBCentralManager!
@@ -74,7 +78,10 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         }
 
         if (DEBUG){
-             debugTextView.text = "Debug Log:"
+            debugTextView = UITextView()
+            debugTextView.frame = CGRectMake(screenWidth/2 - screenWidth/2, screenHeight/2 + screenHeight/4, screenWidth, screenHeight/2)
+            debugTextView.text = "Debug Log:"
+            self.view.addSubview(debugTextView)
         }
     }
     
@@ -85,7 +92,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     @IBAction func startScan(sender: AnyObject){
         if (scanSwitch.on){
-            let services = [TM_USHER_CLIENT_COMMS_SERVICE]
+            let services = [TM_FAN_CLIENT_COMMS_SERVICE]
             centralManager.scanForPeripheralsWithServices(services, options: nil)
             debugPrint("Scan for peripherals started")
         }
@@ -96,7 +103,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func refreshUI(){
-        ticketNumberLabel.text = "Ticker number: \(ticketNumber)"
+        ticketNumberLabel.text = "Ticker number: " + self.ticketNumber + " for" + self.eventID
     }
 
     func debugPrint(text : String){
@@ -109,7 +116,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
                 debugTextView.text = debugTextView.text! + "\n>  " + text
                 debugCount++
             }
-
         }
         println(text)
     }
@@ -142,7 +148,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     //// CBDelegateManager Functions
     func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
-        if (nextCell < MAX_FANS-1){
+        if (nextCell < MAX_FANS){
             centralManager.connectPeripheral(peripheral, options: nil)
         }
     }
@@ -156,9 +162,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             cell.peripheral = peripheral
             cell.backgroundColor = UIColor.blueColor()
             nextCell++
+            peripheral.discoverServices([TM_FAN_CLIENT_COMMS_SERVICE])
         }
-
-        peripheral.discoverServices([TM_USHER_CLIENT_COMMS_SERVICE])
     }
 
     func centralManager(central: CBCentralManager!, didDisconnectPeripheral peripheral: CBPeripheral!, error: NSError!) {
@@ -226,7 +231,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     //// CBPeripheralDelegate Functions
     func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
         for service in peripheral.services {
-            peripheral.discoverCharacteristics([TM_USHER_CLIENT_COMMS_CHARACTERIC_TICKET], forService: service as CBService)
+            peripheral.discoverCharacteristics([TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC, TM_FAN_CLIENT_TICKET_ID_CHARACTERISTIC], forService: service as CBService)
         }
     }
     
@@ -238,8 +243,25 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!){
         if characteristic.properties == CBCharacteristicProperties.Read {
-            self.ticketNumber = dataToInt(characteristic.value)
-            refreshUI()
+            var dataString : NSString? = NSString(data: characteristic.value, encoding: NSUTF8StringEncoding)
+            if (dataString != nil){
+                switch characteristic.UUID {
+                    case TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC:
+                        debugPrint("Recieved CLIENT_EVENT_NAME " + dataString!)
+                        self.eventID = dataString!
+                        break
+                    case TM_FAN_CLIENT_TICKET_ID_CHARACTERISTIC:
+                        debugPrint("Recieved CLIENT_TICKET_ID " + dataString!)
+                        self.ticketNumber = dataString!
+                        break
+                    default:
+                        break
+                }
+                refreshUI()
+            }
+            else {
+                debugPrint("Could not decode string data")
+            }
         }
     }
 
