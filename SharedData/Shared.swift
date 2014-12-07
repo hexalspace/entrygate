@@ -16,14 +16,10 @@ let TM_FAN_CLIENT_TICKET_VALIDATED_CHARACTERISTIC = CBUUID(string: "7764F603-22C
 let DEBUG = true
 let TEST = false
 
-func dataToInt(theData : NSData) -> UInt32 {
-    var theInteger : UInt32 = 0
-    theData.getBytes(&theInteger, length: sizeof(UInt32))
-    return theInteger
+func dataToString(theData : NSData) -> String {
+    return String(NSString(data: theData, encoding: NSUTF8StringEncoding)!)
 }
 
-func intToData(theInteger : UInt32) -> NSData {
-    var theIntegerCopy : UInt32 = theInteger
-    var theData : NSData = NSData(bytes: &theIntegerCopy, length: sizeof(UInt32))
-    return theData
+func stringToData(theString : String) -> NSData {
+    return NSString(string: theString).dataUsingEncoding(NSUTF8StringEncoding)!
 }

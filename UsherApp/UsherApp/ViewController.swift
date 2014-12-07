@@ -243,25 +243,20 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!){
         if characteristic.properties == CBCharacteristicProperties.Read {
-            var dataString : NSString? = NSString(data: characteristic.value, encoding: NSUTF8StringEncoding)
-            if (dataString != nil){
-                switch characteristic.UUID {
-                    case TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC:
-                        debugPrint("Recieved CLIENT_EVENT_NAME " + dataString!)
-                        self.eventID = dataString!
-                        break
-                    case TM_FAN_CLIENT_TICKET_ID_CHARACTERISTIC:
-                        debugPrint("Recieved CLIENT_TICKET_ID " + dataString!)
-                        self.ticketNumber = dataString!
-                        break
-                    default:
-                        break
-                }
-                refreshUI()
+            var dataString = dataToString(characteristic.value)
+            switch characteristic.UUID {
+                case TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC:
+                    debugPrint("Recieved CLIENT_EVENT_NAME " + dataString)
+                    self.eventID = dataString
+                    break
+                case TM_FAN_CLIENT_TICKET_ID_CHARACTERISTIC:
+                    debugPrint("Recieved CLIENT_TICKET_ID " + dataString)
+                    self.ticketNumber = dataString
+                    break
+                default:
+                    break
             }
-            else {
-                debugPrint("Could not decode string data")
-            }
+            refreshUI()
         }
     }
 
