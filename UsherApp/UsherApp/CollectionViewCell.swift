@@ -12,33 +12,61 @@ import CoreBluetooth
 class CollectionViewCell: UICollectionViewCell {
     
     required init(coder aDecoder: NSCoder) {
-        self.active = false
-        self.ticketNumber = 99
+        self.ticketID = ""
+        self.eventName = ""
+        self.colorID = LIGHT_GRAY_COLOR_ID
+        self.peripheral = nil
+        self.recievedValidatedColor = false
+        self.validationColorCharacteristic = nil
+        self.ticketValidatedCharacteristic = nil
         super.init(coder: aDecoder)
     }
 
     let textLabel: UILabel!
-    let imageView: UIImageView!
 
-    var ticketNumber : Int
+    var ticketID : String
+    var eventName : String
+    var colorID : Int
     var peripheral : CBPeripheral?
-    var active : Bool
+    var recievedValidatedColor : Bool
+    var validationColorCharacteristic : CBCharacteristic?
+    var ticketValidatedCharacteristic : CBCharacteristic?
 
     override init(frame: CGRect) {
-        self.active = false
+        self.ticketID = ""
+        self.eventName = ""
+        self.colorID = LIGHT_GRAY_COLOR_ID
         self.peripheral = nil
-        self.ticketNumber = 99
+        self.recievedValidatedColor = false
+        self.validationColorCharacteristic = nil
+        self.ticketValidatedCharacteristic = nil
         super.init(frame: frame)
-        
-        imageView = UIImageView(frame: CGRect(x: 0, y: 16, width: frame.size.width, height: frame.size.height*2/3))
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
-        contentView.addSubview(imageView)
         
         let textFrame = CGRect(x: 0, y: 32, width: frame.size.width, height: frame.size.height/3)
         textLabel = UILabel(frame: textFrame)
         textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
         textLabel.textAlignment = .Center
         contentView.addSubview(textLabel)
+    }
 
+    func copyCell(adjCell: CollectionViewCell){
+        self.ticketID = adjCell.ticketID
+        self.eventName = adjCell.eventName
+        self.peripheral = adjCell.peripheral
+        self.backgroundColor = adjCell.backgroundColor
+        self.colorID = adjCell.colorID
+        self.recievedValidatedColor = adjCell.recievedValidatedColor
+    }
+
+    func resetCell(){
+        self.ticketID = ""
+        self.eventName = ""
+        self.colorID = LIGHT_GRAY_COLOR_ID
+        self.peripheral = nil
+        self.recievedValidatedColor = false
+        self.validationColorCharacteristic = nil
+        self.ticketValidatedCharacteristic = nil
+
+        self.backgroundColor = UIColor.lightGrayColor()
     }
 }

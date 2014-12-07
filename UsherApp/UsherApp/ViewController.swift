@@ -12,17 +12,12 @@ import QuartzCore
 class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     // Usher App Constants
-    let MAX_FANS = 9
-    let MAX_FAN_GROUPS = 1
-    let COL_VIEW_TOP_INSET  = 150
-    let COL_VIEW_BOTTOM_INSET = 0
-    let COL_VIEW_LEFT_INSET = 20
-    let COL_VIEW_RIGHT_INSET = 20
-    let COL_VIEW_CELL_SIZE = 90
-    let DEBUG_VIEW_MAX_LINES = 8
-
     let screenWidth = UIScreen.mainScreen().bounds.width
     let screenHeight = UIScreen.mainScreen().bounds.height
+
+    let MAX_FANS = 9
+    let MAX_FAN_GROUPS = 1
+    let DEBUG_VIEW_MAX_LINES = 8
     
     // UI Elements Added via Storyboard
     @IBOutlet var scanSwitch : UISwitch!
@@ -31,12 +26,13 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
 
     // Modifiable Class Elements
     var debugTextView : UITextView!
-    var ticketNumber : String = ""
-    var eventID : String = ""
+    var ticketID : String = ""
+    var eventName : String = ""
     var nextCell : Int = 0
-    var debugCount  = 0
+    var debugCount : Int = 0
     var centralManager : CBCentralManager!
     var peripheralUser : CBPeripheral!
+    var availableColors : [Int] = [0,1,2,3,4,5,6,7,8]
     
     //// UI Functions
     override func viewDidLoad() {
@@ -47,8 +43,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
 
         // Initialize Collection View
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: CGFloat(COL_VIEW_TOP_INSET), left: CGFloat(COL_VIEW_LEFT_INSET), bottom: CGFloat(COL_VIEW_BOTTOM_INSET), right: CGFloat(COL_VIEW_RIGHT_INSET))
-        layout.itemSize = CGSize(width: COL_VIEW_CELL_SIZE, height: COL_VIEW_CELL_SIZE)
+        layout.sectionInset = UIEdgeInsets(top: CGFloat(screenHeight/5), left: CGFloat(screenWidth/20), bottom: CGFloat(0), right: CGFloat(screenWidth/20))
+        layout.itemSize = CGSize(width: screenWidth/4, height: screenWidth/4)
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -56,28 +52,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         collectionView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView)
 
-        if (TEST){
-            // Add test buttons
-            var b1 = UIButton.buttonWithType(UIButtonType.System) as UIButton
-            b1.frame = CGRectMake(0, 0, 100, 50)
-            b1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-            b1.setTitle("addFakePeriperhal", forState: UIControlState.Normal)
-            b1.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
-            b1.addTarget(self, action: "addFakePeriperhal:", forControlEvents: UIControlEvents.TouchUpInside)
-            b1.backgroundColor = UIColor.lightGrayColor()
-            self.view.addSubview(b1)
-
-            var b2 = UIButton.buttonWithType(UIButtonType.System) as UIButton
-            b2.setTitle("refreshPeripheralState", forState: UIControlState.Normal)
-            b2.frame = CGRectMake(0, 50, 100, 50)
-            b2.imageEdgeInsets = UIEdgeInsets(top: 60, left: 20, bottom: 0, right: 0)
-            b2.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
-            b2.addTarget(self, action: "refreshPeripheralState:", forControlEvents: UIControlEvents.TouchUpInside)
-            b2.backgroundColor = UIColor.lightGrayColor()
-            self.view.addSubview(b2)
-        }
-
         if (DEBUG){
+            // Add debugging log (good for on-phone testing)
             debugTextView = UITextView()
             debugTextView.frame = CGRectMake(screenWidth/2 - screenWidth/2, screenHeight/2 + screenHeight/4, screenWidth, screenHeight/2)
             debugTextView.text = "Debug Log:"
@@ -103,7 +79,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func refreshUI(){
-        ticketNumberLabel.text = "Ticker number: " + self.ticketNumber + " for" + self.eventID
+        ticketNumberLabel.text = "Ticker number: " + self.ticketID + " for" + self.eventName
     }
 
     func debugPrint(text : String){
@@ -120,11 +96,11 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         println(text)
     }
     
-    //// Colection View Delegate
+    //// Collection View Delegate
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CollectionViewCell", forIndexPath: indexPath) as CollectionViewCell
         cell.backgroundColor = UIColor.lightGrayColor()
-        cell.textLabel?.text = "\(indexPath.section):\(indexPath.row)"
+        cell.textLabel?.text = "\(cell.eventName)"
         return cell
     }
     
@@ -138,11 +114,13 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         var cell = collectionView.cellForItemAtIndexPath(indexPath) as CollectionViewCell
-        debugPrint("Selected: \(cell.ticketNumber)");
+        if (cell.peripheral != nil){
+            if (cell.recievedValidatedColor){
+                cell.peripheral!.writeValue(stringToData(VALIDATE_STRING), forCharacteristic: cell.ticketValidatedCharacteristic!, type: CBCharacteristicWriteType.WithResponse)
+            }
+        }
 
-        cell.active = false
-        cell.peripheral = nil
-        cell.backgroundColor = UIColor.lightGrayColor()
+        debugPrint("Selected: \(cell.ticketID)");
     }
     
     
@@ -160,24 +138,29 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             var indexPath = NSIndexPath(forRow: nextCell, inSection: 0)
             var cell = collectionView.cellForItemAtIndexPath(indexPath) as CollectionViewCell
             cell.peripheral = peripheral
-            cell.backgroundColor = UIColor.blueColor()
+            cell.colorID = getNextColorID()
+            cell.backgroundColor = getColor(cell.colorID)
             nextCell++
             peripheral.discoverServices([TM_FAN_CLIENT_COMMS_SERVICE])
         }
     }
 
     func centralManager(central: CBCentralManager!, didDisconnectPeripheral peripheral: CBPeripheral!, error: NSError!) {
+        removePeripheral(peripheral)
+    }
 
+    func removePeripheral(peripheral: CBPeripheral!){
         var j = 0
-
         // Invalidate disconnected peripheral
         for i in 0...MAX_FANS-1 {
             var curPath = NSIndexPath(forRow: i, inSection: 0)
             var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
             if (cell.peripheral == peripheral){
-                cell.active = false
-                cell.peripheral = nil
+                debugPrint("Removing peripheral: " + cell.ticketID)
+                cell.resetCell()
                 j = i
+                nextCell--
+                break
             }
         }
 
@@ -188,18 +171,9 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             if (i != MAX_FANS-1){
                 var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
                 var adjCell = collectionView.cellForItemAtIndexPath(nextPath) as CollectionViewCell
-                cell.active = adjCell.active
-                cell.peripheral = adjCell.peripheral
-                cell.backgroundColor = adjCell.backgroundColor
-            }
-            else {
-                var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
-                cell.active = false
-                cell.peripheral = nil
-                cell.backgroundColor = UIColor.lightGrayColor()
+                cell.copyCell(adjCell)
             }
         }
-        nextCell--
     }
     
     func centralManagerDidUpdateState(central: CBCentralManager!) {
@@ -228,6 +202,29 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         }
     }
 
+    func getCell(peripheral: CBPeripheral!) -> CollectionViewCell? {
+        for i in 0...MAX_FANS-1 {
+            var curPath = NSIndexPath(forRow: i, inSection: 0)
+            var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
+            if (cell.peripheral == peripheral){
+                return cell
+            }
+        }
+        return nil
+    }
+
+    func getNextColorID() -> Int{
+        return availableColors.removeAtIndex(0)
+    }
+
+    func reuseColorID(color : Int){
+        return availableColors.insert(color, atIndex: 0)
+    }
+
+    func validate(eventName : String, ticketID : String) -> Bool {
+        return true
+    }
+
     //// CBPeripheralDelegate Functions
     func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
         for service in peripheral.services {
@@ -240,59 +237,73 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             peripheral.readValueForCharacteristic(characteristic as CBCharacteristic)
         }
     }
+
+    func peripheral(peripheral: CBPeripheral!, didWriteValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
+        var charName : String = ""
+        switch characteristic.UUID {
+            case TM_FAN_CLIENT_VALIDATION_COLOR_CHARACTERISTIC:
+                charName = "VALIDATION_COLOR"
+                break
+            case TM_FAN_CLIENT_TICKET_VALIDATED_CHARACTERISTIC:
+                charName = "TICKET_VALIDATED"
+                break
+            default:
+                break
+        }
+
+        if (error != nil){
+            debugPrint("Failed to write: " + charName)
+            // TODO: try again?
+        }
+        else {
+            debugPrint("Succesful write of: " + charName)
+
+            if (charName == "TICKET_VALIDATED"){
+                removePeripheral(peripheral)
+            }
+        }
+    }
     
     func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!){
+        var cell : CollectionViewCell = getCell(peripheral)!
         if characteristic.properties == CBCharacteristicProperties.Read {
             var dataString = dataToString(characteristic.value)
             switch characteristic.UUID {
                 case TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC:
-                    debugPrint("Recieved CLIENT_EVENT_NAME " + dataString)
-                    self.eventID = dataString
+                    debugPrint("Recieved CLIENT_EVENT_NAME" + dataString)
+                    cell.eventName = dataString
+                    self.eventName = dataString
                     break
                 case TM_FAN_CLIENT_TICKET_ID_CHARACTERISTIC:
-                    debugPrint("Recieved CLIENT_TICKET_ID " + dataString)
-                    self.ticketNumber = dataString
+                    debugPrint("Recieved CLIENT_TICKET_ID" + dataString)
+                    cell.ticketID = dataString
+                    self.ticketID = dataString
                     break
                 default:
                     break
             }
             refreshUI()
         }
-    }
-
-    //// Testing Functions
-    @IBAction func addFakePeriperhal(sender: AnyObject){
-        if (nextCell < MAX_FANS){
-            var indexPath = NSIndexPath(forRow: nextCell, inSection: 0)
-            var cell = collectionView.cellForItemAtIndexPath(indexPath) as CollectionViewCell
-            cell.peripheral = nil
-            cell.backgroundColor = UIColor.blueColor()
-            nextCell++
-        }
-    }
-
-    @IBAction func refreshPeripheralState(sender: AnyObject){
-        var j = 0
-
-        // Shift other peripherals up
-        for i in j...MAX_FANS-1 {
-            var curPath = NSIndexPath(forRow: i, inSection: 0)
-            var nextPath = NSIndexPath(forRow: i+1, inSection: 0)
-            if (i != MAX_FANS-1){
-                var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
-                var adjCell = collectionView.cellForItemAtIndexPath(nextPath) as CollectionViewCell
-                cell.active = adjCell.active
-                cell.peripheral = adjCell.peripheral
-                cell.backgroundColor = adjCell.backgroundColor
-            }
-            else {
-                var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
-                cell.active = false
-                cell.peripheral = nil
-                cell.backgroundColor = UIColor.lightGrayColor()
+        else if characteristic.properties == CBCharacteristicProperties.Write {
+            switch characteristic.UUID {
+                case TM_FAN_CLIENT_VALIDATION_COLOR_CHARACTERISTIC:
+                    debugPrint("Noted VALIDATION_COLOR characteristic")
+                    cell.validationColorCharacteristic = characteristic
+                    break
+                case TM_FAN_CLIENT_TICKET_VALIDATED_CHARACTERISTIC:
+                    debugPrint("Noted TICKET_VALIDATED characteristic")
+                    cell.ticketValidatedCharacteristic = characteristic
+                    break
+                default:
+                    break
             }
         }
-        nextCell--
+
+        if (cell.validationColorCharacteristic != nil){
+            if (cell.ticketValidatedCharacteristic != nil){
+                cell.peripheral!.writeValue(stringToData(String(cell.colorID)), forCharacteristic: cell.validationColorCharacteristic!, type: CBCharacteristicWriteType.WithResponse)
+            }
+        }
     }
 }
 
