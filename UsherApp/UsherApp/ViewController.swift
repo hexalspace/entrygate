@@ -202,7 +202,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         for i in 0...MAX_FANS-1 {
             var curPath = NSIndexPath(forRow: i, inSection: 0)
             var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
-            if (cell.peripheral.identifier == peripheral.identifier){
+            if (cell.peripheral!.identifier == peripheral!.identifier){
                 debugPrint("Removing peripheral: " + cell.ticketID)
                 reuseColorID(cell.colorID)
                 cell.resetCell()
@@ -254,7 +254,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         for i in 0...MAX_FANS-1 {
             var curPath = NSIndexPath(forRow: i, inSection: 0)
             var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
-            if (cell.peripheral.identifier == peripheral.identifier){
+            if (cell.peripheral!.identifier == peripheral!.identifier){
                 return cell
             }
         }
