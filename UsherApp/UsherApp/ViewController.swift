@@ -20,9 +20,10 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     let DEBUG_VIEW_MAX_LINES = 8
     
     // UI Elements Added via Storyboard
-    @IBOutlet var scanSwitch : UISwitch!
-    @IBOutlet var ticketNumberLabel :UILabel!
-    @IBOutlet var collectionView : UICollectionView!
+    var scanSwitch : UISwitch!
+    var ticketNumberLabel :UILabel!
+    var appTitleLabel :UILabel!
+    var collectionView : UICollectionView!
 
     // Modifiable Class Elements
     var debugTextView : UITextView!
@@ -52,13 +53,37 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         collectionView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView)
 
+        // Add Title Label
+        appTitleLabel = UILabel()
+        appTitleLabel.frame = CGRectMake(0, screenHeight/20, screenWidth, screenHeight/10)
+        appTitleLabel.textAlignment = NSTextAlignment.Center
+        appTitleLabel.numberOfLines = 1
+        appTitleLabel.font = UIFont(name: "Helvetica", size: 40.0)
+        appTitleLabel.text = "TM Usher App"
+        self.view.addSubview(appTitleLabel)
+
+        ticketNumberLabel = UILabel()
+        ticketNumberLabel.frame = CGRectMake(0, (2*screenHeight)/20, screenWidth, screenHeight/10)
+        ticketNumberLabel.textAlignment = NSTextAlignment.Center
+        ticketNumberLabel.numberOfLines = 1
+        ticketNumberLabel.font = UIFont(name: "Helvetica", size: 15.0)
+        ticketNumberLabel.text = "Ticket number: "
+        self.view.addSubview(ticketNumberLabel)
+
         if (DEBUG){
             // Add debugging log (good for on-phone testing)
             debugTextView = UITextView()
-            debugTextView.frame = CGRectMake(screenWidth/2 - screenWidth/2, screenHeight/2 + screenHeight/4, screenWidth, screenHeight/2)
+            debugTextView.frame = CGRectMake(0, screenHeight/2 + screenHeight/4, screenWidth, screenHeight/2)
             debugTextView.text = "Debug Log:"
             self.view.addSubview(debugTextView)
         }
+
+        scanSwitch = UISwitch()
+        scanSwitch.frame = CGRectMake(screenWidth/2 - (scanSwitch.frame.size.width/2), screenHeight/2 + screenHeight/4, 0, 0)
+        scanSwitch.setOn(false, animated: false);
+        scanSwitch.addTarget(self, action: "startScan:", forControlEvents: .ValueChanged);
+        self.view.addSubview(scanSwitch);
+
     }
     
     override func didReceiveMemoryWarning(){
@@ -66,7 +91,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func startScan(sender: AnyObject){
+    func startScan(sender: AnyObject){
         if (scanSwitch.on){
             let services = [TM_FAN_CLIENT_COMMS_SERVICE]
             centralManager.scanForPeripheralsWithServices(services, options: nil)
