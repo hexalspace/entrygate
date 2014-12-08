@@ -12,7 +12,7 @@ import QuartzCore
 
 class SelectedTicketViewController: UIViewController/*, CBPeripheralManagerDelegate, CBCentralManagerDelegate*/ {
     
-    let DEMO_MODE = true
+    let DEMO_MODE = false
     
     //Parameters should be self, nil. Not working without nil, nil
     var bluetoothManager : FanBluetoothManager!
@@ -53,10 +53,11 @@ class SelectedTicketViewController: UIViewController/*, CBPeripheralManagerDeleg
         ticketIdLabel.text = id
         connectedLabel.hidden = true
         pleaseShowLabel.hidden = true
-        searchButtonUpdated(self)
+
         
         //Set up views bluetooth backend
         bluetoothManager = FanBluetoothManager(view: self, eventName: ticketName, ticketID: id)
+        searchButtonUpdated(self)
 
     }
 

@@ -13,7 +13,8 @@
 		165AB6411A1A6218001D113A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 165AB6401A1A6218001D113A /* Images.xcassets */; };
 		165AB6441A1A6218001D113A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165AB6421A1A6218001D113A /* LaunchScreen.xib */; };
 		165AB6501A1A6218001D113A /* UsherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165AB64F1A1A6218001D113A /* UsherAppTests.swift */; };
-		165AB65B1A1A62CC001D113A /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165AB65A1A1A62CC001D113A /* Shared.swift */; };
+		9B04DA2F1A36307F000A2983 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B04DA2E1A36307F000A2983 /* CollectionViewCell.swift */; };
+		9B04DA311A3630E5000A2983 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B04DA301A3630E5000A2983 /* Shared.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,8 @@
 		165AB6491A1A6218001D113A /* UsherAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsherAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		165AB64E1A1A6218001D113A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		165AB64F1A1A6218001D113A /* UsherAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsherAppTests.swift; sourceTree = "<group>"; };
-		165AB65A1A1A62CC001D113A /* Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		9B04DA2E1A36307F000A2983 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		9B04DA301A3630E5000A2983 /* Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = ../../SharedData/Shared.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,8 @@
 		165AB6361A1A6218001D113A /* UsherApp */ = {
 			isa = PBXGroup;
 			children = (
+				9B04DA301A3630E5000A2983 /* Shared.swift */,
+				9B04DA2E1A36307F000A2983 /* CollectionViewCell.swift */,
 				165AB6391A1A6218001D113A /* AppDelegate.swift */,
 				165AB63B1A1A6218001D113A /* ViewController.swift */,
 				165AB63D1A1A6218001D113A /* Main.storyboard */,
@@ -118,7 +122,6 @@
 		165AB6591A1A62CC001D113A /* SharedData */ = {
 			isa = PBXGroup;
 			children = (
-				165AB65A1A1A62CC001D113A /* Shared.swift */,
 			);
 			name = SharedData;
 			path = ../../../entrygate/SharedData;
@@ -224,8 +227,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				165AB65B1A1A62CC001D113A /* Shared.swift in Sources */,
 				165AB63C1A1A6218001D113A /* ViewController.swift in Sources */,
+				9B04DA2F1A36307F000A2983 /* CollectionViewCell.swift in Sources */,
+				9B04DA311A3630E5000A2983 /* Shared.swift in Sources */,
 				165AB63A1A1A6218001D113A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,9 +355,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Noeleen Livingstone (S46SR32P87)";
 				INFOPLIST_FILE = UsherApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "417cc823-999d-401b-9fcf-882e68d2c5e8";
 			};
 			name = Debug;
 		};
@@ -361,9 +367,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Noeleen Livingstone (S46SR32P87)";
 				INFOPLIST_FILE = UsherApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "417cc823-999d-401b-9fcf-882e68d2c5e8";
 			};
 			name = Release;
 		};
@@ -420,6 +428,7 @@
 				165AB6551A1A6218001D113A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		165AB6561A1A6218001D113A /* Build configuration list for PBXNativeTarget "UsherAppTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +437,7 @@
 				165AB6581A1A6218001D113A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

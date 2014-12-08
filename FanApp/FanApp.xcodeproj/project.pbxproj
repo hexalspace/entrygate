@@ -363,11 +363,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iOS Development: Noeleen Livingstone (S46SR32P87)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Noeleen Livingstone (S46SR32P87)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Noeleen Livingstone (S46SR32P87)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = FanApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5a4c4a06-023d-4f1f-9925-e7eea2ff82e9";
+				PROVISIONING_PROFILE = "417cc823-999d-401b-9fcf-882e68d2c5e8";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -376,11 +378,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iOS Development: Noeleen Livingstone (S46SR32P87)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Noeleen Livingstone (S46SR32P87)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Noeleen Livingstone (S46SR32P87)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = FanApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5a4c4a06-023d-4f1f-9925-e7eea2ff82e9";
+				PROVISIONING_PROFILE = "417cc823-999d-401b-9fcf-882e68d2c5e8";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
