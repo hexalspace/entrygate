@@ -19,11 +19,13 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     let MAX_FAN_GROUPS = 1
     let DEBUG_VIEW_MAX_LINES = 8
     
-    // UI Elements Added via Storyboard
+    // UI Elements Added Programmatically
     var scanSwitch : UISwitch!
     var ticketNumberLabel :UILabel!
     var appTitleLabel :UILabel!
     var collectionView : UICollectionView!
+    var scanSwitchLabel : UILabel!
+    var activityIndicator: UIActivityIndicatorView!
 
     // Modifiable Class Elements
     var debugTextView : UITextView!
@@ -62,6 +64,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         appTitleLabel.text = "TM Usher App"
         self.view.addSubview(appTitleLabel)
 
+        // Add ticket label
         ticketNumberLabel = UILabel()
         ticketNumberLabel.frame = CGRectMake(0, (2*screenHeight)/20, screenWidth, screenHeight/10)
         ticketNumberLabel.textAlignment = NSTextAlignment.Center
@@ -78,6 +81,22 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             self.view.addSubview(debugTextView)
         }
 
+        //Add label for scan switch
+        scanSwitchLabel = UILabel()
+        scanSwitchLabel.frame = CGRectMake(0, screenHeight/2 + (11*screenHeight/64), screenWidth, screenHeight/10)
+        scanSwitchLabel.textAlignment = NSTextAlignment.Center
+        scanSwitchLabel.numberOfLines = 1
+        scanSwitchLabel.font = UIFont(name: "Helvetica", size: 14.0)
+        scanSwitchLabel.text = "Start Scan"
+        self.view.addSubview(scanSwitchLabel)
+
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray) 
+        activityIndicator.frame = CGRectMake(screenWidth/2, screenHeight/2 + (12*screenHeight/32), 0, 0)
+        activityIndicator.transform = CGAffineTransformMakeScale(2, 2)
+        activityIndicator.stopAnimating()
+        self.view.addSubview(activityIndicator)
+
+        // Add scan switch
         scanSwitch = UISwitch()
         scanSwitch.frame = CGRectMake(screenWidth/2 - (scanSwitch.frame.size.width/2), screenHeight/2 + screenHeight/4, 0, 0)
         scanSwitch.setOn(false, animated: false);
@@ -95,10 +114,14 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         if (scanSwitch.on){
             let services = [TM_FAN_CLIENT_COMMS_SERVICE]
             centralManager.scanForPeripheralsWithServices(services, options: nil)
+            scanSwitchLabel.text = "Stop Scan"
+            activityIndicator.startAnimating()
             debugPrint("Scan for peripherals started")
         }
         else{
             centralManager.stopScan()
+            scanSwitchLabel.text = "Start Scan"
+            activityIndicator.stopAnimating()
             debugPrint("Scan for peripherals stopped")
         }
     }
@@ -148,7 +171,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         debugPrint("Selected: \(cell.ticketID)");
     }
     
-    
     //// CBDelegateManager Functions
     func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
         if (nextCell < MAX_FANS){
@@ -182,6 +204,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
             if (cell.peripheral == peripheral){
                 debugPrint("Removing peripheral: " + cell.ticketID)
+                reuseColorID(cell.colorID)
                 cell.resetCell()
                 j = i
                 nextCell--

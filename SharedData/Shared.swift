@@ -35,4 +35,3 @@ func getColor(stringInt : String) -> UIColor {
 func getColor(theInt : Int) -> UIColor {
 	return colorMapping[theInt]
 }
-
