@@ -114,6 +114,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         if (scanSwitch.on){
             let services = [TM_FAN_CLIENT_COMMS_SERVICE]
             centralManager.scanForPeripheralsWithServices(services, options: nil)
+            //centralManager.scanForPeripheralsWithServices(nil, options: nil)
             scanSwitchLabel.text = "Stop Scan"
             activityIndicator.startAnimating()
             debugPrint("Scan for peripherals started")
@@ -174,17 +175,28 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     //// CBDelegateManager Functions
     func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
         if (nextCell < MAX_FANS){
-            centralManager.connectPeripheral(peripheral, options: nil)
+            peripheralUser = peripheral
+            println(peripheral)
+            println(advertisementData)
+            centralManager.delegate = self
+            debugPrint("Discovered peripheral")
+            centralManager.connectPeripheral(peripheralUser, options: nil)
+            debugPrint("Tried to connect")
         }
     }
     
+    func centralManager(central: CBCentralManager!, didFailToConnectPeripheral peripheral: CBPeripheral!, error: NSError!) {
+        println("Failed to connect")
+    }
+    
     func centralManager(central: CBCentralManager!, didConnectPeripheral peripheral: CBPeripheral!) {
-        peripheral.delegate = self
-        debugPrint("Connected to discovered peripheral: \(peripheral.name)")
+        println(peripheral)
+        peripheralUser.delegate = self
+        debugPrint("Connected to discovered peripheral: \(peripheralUser.name)")
         if (nextCell < MAX_FANS){
             var indexPath = NSIndexPath(forRow: nextCell, inSection: 0)
             var cell = collectionView.cellForItemAtIndexPath(indexPath) as CollectionViewCell
-            cell.peripheral = peripheral
+            cell.peripheral = peripheralUser
             cell.colorID = getNextColorID()
             cell.backgroundColor = getColor(cell.colorID)
             nextCell++
@@ -193,7 +205,9 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     }
 
     func centralManager(central: CBCentralManager!, didDisconnectPeripheral peripheral: CBPeripheral!, error: NSError!) {
+        debugPrint("Connection failed")
         removePeripheral(peripheral)
+        centralManager.connectPeripheral(peripheralUser, options: nil)
     }
 
     func removePeripheral(peripheral: CBPeripheral!){
@@ -275,6 +289,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
 
     //// CBPeripheralDelegate Functions
     func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
+        debugPrint("Services found!")
         for service in peripheral.services {
             peripheral.discoverCharacteristics([TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC, TM_FAN_CLIENT_TICKET_ID_CHARACTERISTIC], forService: service as CBService)
         }

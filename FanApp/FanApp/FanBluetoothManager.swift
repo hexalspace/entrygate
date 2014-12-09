@@ -43,10 +43,13 @@ class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
         
         var characteristics = [eventCharacteristic, idCharacteristic, colorCharacteristic, validatedCharacteristic]
         
-        commService = CBMutableService(type: TM_FAN_CLIENT_COMMS_SERVICE!, primary: true)
+        commService = CBMutableService(type: TM_FAN_CLIENT_COMMS_SERVICE, primary: true)
+        //commService = CBMutableService(type: CBUUID(string: "2DBB2280-ACD5-4FCB-ABE5-A465AA69BACC"), primary: true)
+    
         commService.characteristics = characteristics
         
         peripheralManager.addService(commService)
+        //commService.includedServices = [CBMutableService(type: TM_FAN_CLIENT_COMMS_SERVICE, primary: true)]
         
     }
     
@@ -58,10 +61,15 @@ class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
         return validatedCharacteristic.value
     }
     
+    func peripheralManager(peripheral: CBPeripheralManager!, didAddService service: CBService!, error: NSError!) {
+        println("YO! + \(error)")
+    }
+    
     func startAdvertising(){
         switch peripheralManager.state{
         case .PoweredOn:
-            peripheralManager.startAdvertising([CBAdvertisementDataServiceDataKey:TM_FAN_CLIENT_COMMS_SERVICE])
+            println("Service is \([CBAdvertisementDataServiceDataKey:TM_FAN_CLIENT_COMMS_SERVICE])")
+            peripheralManager.startAdvertising([CBAdvertisementDataLocalNameKey:"Fan APP", CBAdvertisementDataServiceUUIDsKey:[TM_FAN_CLIENT_COMMS_SERVICE]])
             break
         default:
             println("Can't begin advertising when bluetooth is not enabled")
@@ -80,10 +88,12 @@ class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
         case TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC:
             request.value = eventCharacteristic.value
             peripheral.respondToRequest(request, withResult: CBATTError.Success)
+            println("Received read request")
             break
         case TM_FAN_CLIENT_TICKET_ID_CHARACTERISTIC:
             request.value = idCharacteristic.value
             peripheral.respondToRequest(request, withResult: CBATTError.Success)
+            println("Received read request")
             break
         case TM_FAN_CLIENT_VALIDATION_COLOR:
             request.value = colorCharacteristic.value
