@@ -33,9 +33,9 @@ class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
         viewController = view
         
-        eventCharacteristic = CBMutableCharacteristic(type: TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC, properties: CBCharacteristicProperties.Read, value: NSData(base64EncodedString: eventName, options: nil), permissions: CBAttributePermissions.Readable)
+        eventCharacteristic = CBMutableCharacteristic(type: TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC, properties: CBCharacteristicProperties.Read, value: stringToData(eventName), permissions: CBAttributePermissions.Readable)
         
-        idCharacteristic = CBMutableCharacteristic(type: TM_FAN_CLIENT_TICKET_ID_CHARACTERISTIC, properties: CBCharacteristicProperties.Read, value: NSData(base64EncodedString: ticketID, options: nil), permissions: CBAttributePermissions.Readable)
+        idCharacteristic = CBMutableCharacteristic(type: TM_FAN_CLIENT_TICKET_ID_CHARACTERISTIC, properties: CBCharacteristicProperties.Read, value: stringToData(ticketID), permissions: CBAttributePermissions.Readable)
         
         colorCharacteristic = CBMutableCharacteristic(type: TM_FAN_CLIENT_VALIDATION_COLOR, properties: CBCharacteristicProperties.Write, value: nil, permissions: CBAttributePermissions.Writeable)
         
@@ -44,13 +44,9 @@ class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
         var characteristics = [eventCharacteristic, idCharacteristic, colorCharacteristic, validatedCharacteristic]
         
         commService = CBMutableService(type: TM_FAN_CLIENT_COMMS_SERVICE, primary: true)
-        //commService = CBMutableService(type: CBUUID(string: "2DBB2280-ACD5-4FCB-ABE5-A465AA69BACC"), primary: true)
     
         commService.characteristics = characteristics
-        
-        peripheralManager.addService(commService)
-        //commService.includedServices = [CBMutableService(type: TM_FAN_CLIENT_COMMS_SERVICE, primary: true)]
-        
+    
     }
     
     func getValidationColor() -> NSData{
@@ -112,7 +108,7 @@ class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
     func peripheralManager(peripheral: CBPeripheralManager!, didReceiveWriteRequests requests: [AnyObject]!) {
         for request in requests{
             var downcastRequest = request as CBATTRequest
-            switch request.UUID{
+            switch downcastRequest.characteristic.UUID{
             case TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC:
                 peripheral.respondToRequest(downcastRequest, withResult: CBATTError.WriteNotPermitted)
                 break
@@ -120,6 +116,7 @@ class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
                 peripheral.respondToRequest(downcastRequest, withResult: CBATTError.WriteNotPermitted)
                 break
             case TM_FAN_CLIENT_VALIDATION_COLOR:
+                println("Wrote color")
                 colorCharacteristic.value = downcastRequest.value
                 peripheral.respondToRequest(downcastRequest, withResult: CBATTError.Success)
                 viewController.sucessfulConnection()
@@ -144,6 +141,7 @@ class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
             println("Bluetooth is powered off")
             break
         case .PoweredOn:
+            peripheralManager.addService(commService)
             println("Bluetooth is powered on")
             break
         case .Resetting:

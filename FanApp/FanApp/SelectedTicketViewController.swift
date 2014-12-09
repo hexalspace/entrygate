@@ -71,7 +71,8 @@ class SelectedTicketViewController: UIViewController/*, CBPeripheralManagerDeleg
             colorView.backgroundColor = possibleColors[Int(arc4random_uniform(UInt32(possibleColors.count)))]
         }
         else{
-            var rawColorDate : NSData = bluetoothManager.getValidationColor()
+            var rawColorData : NSData = bluetoothManager.getValidationColor()
+            colorView.backgroundColor = getColor(dataToString(rawColorData))
             //do something to set colorView to the new color
         }
         searchSwitch.hidden = true
@@ -95,6 +96,7 @@ class SelectedTicketViewController: UIViewController/*, CBPeripheralManagerDeleg
         
         //change to actual logic after we figure out processing
         if(true){ //Usher validates ticket
+            bluetoothManager.stopAdvertising()
             self.performSegueWithIdentifier("successSegue", sender: self)
         }
         else if(false){ //Usher invalidates ticket

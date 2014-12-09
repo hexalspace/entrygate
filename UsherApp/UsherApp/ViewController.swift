@@ -197,7 +197,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             var indexPath = NSIndexPath(forRow: nextCell, inSection: 0)
             var cell = collectionView.cellForItemAtIndexPath(indexPath) as CollectionViewCell
             cell.peripheral = peripheralUser
-            cell.colorID = getNextColorID()
+            //cell.colorID = getNextColorID()
+            cell.colorID = Int(arc4random_uniform(9))
             cell.backgroundColor = getColor(cell.colorID)
             nextCell++
             peripheral.discoverServices([TM_FAN_CLIENT_COMMS_SERVICE])
@@ -291,13 +292,22 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
         debugPrint("Services found!")
         for service in peripheral.services {
-            peripheral.discoverCharacteristics([TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC, TM_FAN_CLIENT_TICKET_ID_CHARACTERISTIC], forService: service as CBService)
+            peripheral.discoverCharacteristics([TM_FAN_CLIENT_EVENT_NAME_CHARACTERISTIC, TM_FAN_CLIENT_TICKET_ID_CHARACTERISTIC, TM_FAN_CLIENT_VALIDATION_COLOR_CHARACTERISTIC, TM_FAN_CLIENT_TICKET_VALIDATED_CHARACTERISTIC], forService: service as CBService)
         }
     }
     
     func peripheral(peripheral: CBPeripheral!, didDiscoverCharacteristicsForService service: CBService!, error: NSError!) {
         for characteristic in service.characteristics {
+            var downcastCharacteristic = characteristic as CBCharacteristic
+            println(downcastCharacteristic)
             peripheral.readValueForCharacteristic(characteristic as CBCharacteristic)
+            var cell : CollectionViewCell = getCell(peripheral)!
+            if(downcastCharacteristic.UUID == TM_FAN_CLIENT_VALIDATION_COLOR_CHARACTERISTIC){
+                peripheral.writeValue(stringToData(String(cell.colorID)), forCharacteristic: downcastCharacteristic, type: CBCharacteristicWriteType.WithResponse)
+            }
+            if(downcastCharacteristic.UUID == TM_FAN_CLIENT_TICKET_VALIDATED_CHARACTERISTIC){
+                cell.ticketValidatedCharacteristic = downcastCharacteristic
+            }
         }
     }
 
@@ -351,7 +361,9 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             }
             refreshUI()
         }
-        else if characteristic.properties == CBCharacteristicProperties.Write {
+        
+        //Code wasn't running, bypassed by Ryan's Write code
+        /*else if characteristic.properties == CBCharacteristicProperties.Write {
             switch characteristic.UUID {
                 case TM_FAN_CLIENT_VALIDATION_COLOR_CHARACTERISTIC:
                     debugPrint("Noted VALIDATION_COLOR characteristic")
@@ -367,10 +379,10 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         }
 
         if (cell.validationColorCharacteristic != nil){
-            if (cell.ticketValidatedCharacteristic != nil){
+           if (cell.ticketValidatedCharacteristic != nil){
                 cell.peripheral!.writeValue(stringToData(String(cell.colorID)), forCharacteristic: cell.validationColorCharacteristic!, type: CBCharacteristicWriteType.WithResponse)
             }
-        }
+        }*/
     }
 }
 

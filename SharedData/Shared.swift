@@ -18,7 +18,7 @@ let LIGHT_GRAY_COLOR_ID = 9
 let colorMapping = [UIColor.redColor(), UIColor.magentaColor(), UIColor.blueColor(), UIColor.cyanColor(), UIColor.greenColor(), UIColor.yellowColor(), UIColor.blackColor(), UIColor.orangeColor(), UIColor.purpleColor(), UIColor.lightGrayColor()]
 let VALIDATE_STRING = "VALIDATED"
 
-let DEBUG = true
+let DEBUG = false
 
 func dataToString(theData : NSData) -> String {
     return String(NSString(data: theData, encoding: NSUTF8StringEncoding)!)
