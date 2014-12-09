@@ -47,10 +47,10 @@ class SelectedTicketViewController: UIViewController/*, CBPeripheralManagerDeleg
         //set up view's visual elements
         searchSwitch.setOn(false, animated:false)
         ticketNameLabel.text = ticketName
-        venueLabel.text = venue
-        dateLabel.text = date
+        venueLabel.text = "Venue: \(venue)"
+        dateLabel.text = "Date: \(date)"
         seatLabel.text = seat
-        ticketIdLabel.text = id
+        ticketIdLabel.text = "Ticket ID: \(id)"
         connectedLabel.hidden = true
         pleaseShowLabel.hidden = true
 

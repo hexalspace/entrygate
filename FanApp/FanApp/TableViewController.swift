@@ -68,11 +68,11 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!){
         if(segue.identifier == "TicketSelected"){
             var newView = segue.destinationViewController as SelectedTicketViewController
-            newView.ticketName = selectedCell.ticketName.text!
-            newView.venue = selectedCell.venueName.text!
-            newView.date = selectedCell.eventDate.text!
+            newView.ticketName = (selectedCell.ticketName.text)!
+            newView.venue = selectedCell.venueName.text!.substringFromIndex(advance(selectedCell.venueName.text!.startIndex, 7))
+            newView.date = selectedCell.eventDate.text!.substringFromIndex(advance(selectedCell.eventDate.text!.startIndex, 6))
             newView.seat = selectedCell.seatLocation.text!
-            newView.id = selectedCell.ticketID.text!
+            newView.id = selectedCell.ticketID.text!.substringFromIndex(advance(selectedCell.ticketID.text!.startIndex, 11))
         }
     }
 

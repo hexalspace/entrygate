@@ -71,6 +71,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         ticketNumberLabel.numberOfLines = 1
         ticketNumberLabel.font = UIFont(name: "Helvetica", size: 15.0)
         ticketNumberLabel.text = "Ticket number: "
+        //ticketNumberLabel.text = ""
         self.view.addSubview(ticketNumberLabel)
 
         if (DEBUG){
@@ -83,7 +84,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
 
         //Add label for scan switch
         scanSwitchLabel = UILabel()
-        scanSwitchLabel.frame = CGRectMake(0, screenHeight/2 + (11*screenHeight/64), screenWidth, screenHeight/10)
+        scanSwitchLabel.frame = CGRectMake(0, screenHeight/2 + (20*screenHeight/64), screenWidth, screenHeight/10)
         scanSwitchLabel.textAlignment = NSTextAlignment.Center
         scanSwitchLabel.numberOfLines = 1
         scanSwitchLabel.font = UIFont(name: "Helvetica", size: 14.0)
@@ -91,14 +92,14 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         self.view.addSubview(scanSwitchLabel)
 
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray) 
-        activityIndicator.frame = CGRectMake(screenWidth/2, screenHeight/2 + (12*screenHeight/32), 0, 0)
+        activityIndicator.frame = CGRectMake(screenWidth/2, screenHeight/2 + (13*screenHeight/32), 0, 0)
         activityIndicator.transform = CGAffineTransformMakeScale(2, 2)
         activityIndicator.stopAnimating()
         self.view.addSubview(activityIndicator)
 
         // Add scan switch
         scanSwitch = UISwitch()
-        scanSwitch.frame = CGRectMake(screenWidth/2 - (scanSwitch.frame.size.width/2), screenHeight/2 + screenHeight/4, 0, 0)
+        scanSwitch.frame = CGRectMake(screenWidth/2 - (scanSwitch.frame.size.width/2), screenHeight/2 + (20.5*screenHeight/64), 0, 0)
         scanSwitch.setOn(false, animated: false);
         scanSwitch.addTarget(self, action: "startScan:", forControlEvents: .ValueChanged);
         self.view.addSubview(scanSwitch);
@@ -128,7 +129,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func refreshUI(){
-        ticketNumberLabel.text = "Ticker number: " + self.ticketID + " for" + self.eventName
+        ticketNumberLabel.text = "Ticker number: " + self.ticketID + " for " + self.eventName
     }
 
     func debugPrint(text : String){
