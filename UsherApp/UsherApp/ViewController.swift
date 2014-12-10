@@ -212,7 +212,9 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             cell.peripheral = peripheralUser[nextCell]
             cell.cellIndex = nextCell
             //cell.colorID = getNextColorID()
-            cell.colorID = Int(arc4random_uniform(9))
+            var random = Int(arc4random_uniform(UInt32(availableColors.count)))
+            cell.colorID = availableColors[random]
+            availableColors.removeAtIndex(random)
             cell.backgroundColor = getColor(cell.colorID)
             nextCell++
             peripheral.discoverServices([TM_FAN_CLIENT_COMMS_SERVICE])
@@ -238,6 +240,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             var curPath = NSIndexPath(forRow: i, inSection: 0)
             var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
             if (cell.peripheral!.identifier == peripheralUser[index]!.identifier){
+                availableColors.append(cell.colorID)
                 debugPrint("Removing peripheral: " + cell.ticketID)
                 reuseColorID(cell.colorID)
                 cell.resetCell()
