@@ -77,11 +77,9 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     @IBAction func helpPressed(sender: AnyObject) {
-        var alert: UIAlertView = UIAlertView()
-        alert.title = "Help"
-        alert.message = "Tap a ticket from the list below to continue"
-        alert.addButtonWithTitle("Ok")
-        alert.show()
+        let alert = UIAlertController(title: "Help", message: "Tap a ticket from the list below to continue", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {

@@ -22,11 +22,9 @@ class InitialViewController: UIViewController {
     
     
     @IBAction func helpPressed(sender: AnyObject) {
-        var alert: UIAlertView = UIAlertView()
-        alert.title = "Help"
-        alert.message = "Tap \"My Tickets\" to view all your purchased tickets"
-        alert.addButtonWithTitle("Ok")
-        alert.show()
+        let alert = UIAlertController(title: "Help", message: "Tap \"My Tickets\" to view all your purchased tickets", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     @IBAction func purchaseTicketsPressed(sender: AnyObject) {

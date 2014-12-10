@@ -143,11 +143,9 @@ class SelectedTicketViewController: UIViewController/*, CBPeripheralManagerDeleg
     
     
     @IBAction func helpPressed(sender: AnyObject) {
-        var alert: UIAlertView = UIAlertView()
-        alert.title = "Help"
-        alert.message = "Tap the switch above \"Search for Usher\" to search for an usher to validate your ticket. Connection wil be handled automatically"
-        alert.addButtonWithTitle("Ok")
-        alert.show()
+        let alert = UIAlertController(title: "Help", message: "Tap the switch above \"Search for Usher\" to search for an usher to validate your ticket. Connection wil be handled automatically", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
     }
     
 

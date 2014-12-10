@@ -164,13 +164,27 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         var cell = collectionView.cellForItemAtIndexPath(indexPath) as CollectionViewCell
+        let alert = UIAlertController(title: "Validate Ticket?", message: "Are you sure you want to validate ticket number: \(cell.ticketID) for \(cell.eventName)?", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Validate", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction!) in self.validateTicket(cell)}))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
+        
+        //following code moved to validateTicket
+        /*if (cell.peripheral != nil){
+            if (cell.recievedValidatedColor){
+                cell.peripheral!.writeValue(stringToData(VALIDATE_STRING), forCharacteristic: cell.ticketValidatedCharacteristic!, type: CBCharacteristicWriteType.WithResponse)
+            }
+        }*/
+
+        debugPrint("Selected: \(cell.ticketID)");
+    }
+    
+    func validateTicket(cell: CollectionViewCell){
         if (cell.peripheral != nil){
             if (cell.recievedValidatedColor){
                 cell.peripheral!.writeValue(stringToData(VALIDATE_STRING), forCharacteristic: cell.ticketValidatedCharacteristic!, type: CBCharacteristicWriteType.WithResponse)
             }
         }
-
-        debugPrint("Selected: \(cell.ticketID)");
     }
     
     //// CBDelegateManager Functions
