@@ -60,8 +60,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         appTitleLabel.frame = CGRectMake(0, screenHeight/20, screenWidth, screenHeight/10)
         appTitleLabel.textAlignment = NSTextAlignment.Center
         appTitleLabel.numberOfLines = 1
-        appTitleLabel.font = UIFont(name: "Helvetica Neue Medium Italic", size: 40.0)
-        appTitleLabel.text = "ticketmaster"
+        appTitleLabel.font = UIFont(name: "Helvetica", size: 40.0)
+        appTitleLabel.text = "Ticketmaster"
         self.view.addSubview(appTitleLabel)
 
         // Add ticket label
