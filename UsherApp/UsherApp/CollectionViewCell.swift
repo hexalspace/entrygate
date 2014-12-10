@@ -12,6 +12,7 @@ import CoreBluetooth
 class CollectionViewCell: UICollectionViewCell {
     
     required init(coder aDecoder: NSCoder) {
+        self.cellIndex = -1
         self.ticketID = ""
         self.eventName = ""
         self.colorID = LIGHT_GRAY_COLOR_ID
@@ -24,6 +25,7 @@ class CollectionViewCell: UICollectionViewCell {
 
     let textLabel: UILabel!
 
+    var cellIndex : Int
     var ticketID : String
     var eventName : String
     var colorID : Int
@@ -33,6 +35,7 @@ class CollectionViewCell: UICollectionViewCell {
     var ticketValidatedCharacteristic : CBCharacteristic?
 
     override init(frame: CGRect) {
+        self.cellIndex = -1
         self.ticketID = ""
         self.eventName = ""
         self.colorID = LIGHT_GRAY_COLOR_ID
@@ -50,6 +53,7 @@ class CollectionViewCell: UICollectionViewCell {
     }
 
     func copyCell(adjCell: CollectionViewCell){
+        self.cellIndex = adjCell.cellIndex
         self.ticketID = adjCell.ticketID
         self.eventName = adjCell.eventName
         self.peripheral = adjCell.peripheral
@@ -59,6 +63,7 @@ class CollectionViewCell: UICollectionViewCell {
     }
 
     func resetCell(){
+        self.cellIndex = -1
         self.ticketID = ""
         self.eventName = ""
         self.colorID = LIGHT_GRAY_COLOR_ID

@@ -64,6 +64,7 @@ class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
     func startAdvertising(){
         switch peripheralManager.state{
         case .PoweredOn:
+            peripheralManager.addService(commService)
             println("Service is \([CBAdvertisementDataServiceDataKey:TM_FAN_CLIENT_COMMS_SERVICE])")
             peripheralManager.startAdvertising([CBAdvertisementDataLocalNameKey:"Fan APP", CBAdvertisementDataServiceUUIDsKey:[TM_FAN_CLIENT_COMMS_SERVICE]])
             break
@@ -76,6 +77,7 @@ class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
     }
     
     func stopAdvertising(){
+        peripheralManager.removeAllServices()
         peripheralManager.stopAdvertising()
     }
     
@@ -141,7 +143,6 @@ class FanBluetoothManager: NSObject, CBPeripheralManagerDelegate{
             println("Bluetooth is powered off")
             break
         case .PoweredOn:
-            peripheralManager.addService(commService)
             println("Bluetooth is powered on")
             break
         case .Resetting:

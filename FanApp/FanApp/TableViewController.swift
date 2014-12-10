@@ -39,7 +39,16 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         ("The Artist Formally Known as \'Eggert\'", "Staples Center", "3/3/15", "Section 4, Row 9, Seat 15", "31415"),
         ("The Nibblers - Keep on Nibbing Tour", "Rose Bowl", "Tomorrow", "Section 6A, Row 1, Seat nib", "82754"),
         ("Rolling Stones - 200 and Counting Tour", "Pauley Space Station Pavillion", "4/18/2163", "Backstage Access", "82653"),
-        ("The 100th Turing Awards - Noah Duncan Hosting", "Dolby Theatre", "6/17/2066", "Row 1 Seat 1", "01101")
+        ("The 100th Turing Awards - Noah Duncan Hosting", "Dolby Theatre", "6/17/2066", "Row 1 Seat 1", "01101"),
+        ("The Mythical Man-Moth", "Sydney Opera House", "1/6/17", "Row 1", "62954"),
+        ("MTTB - MEAN TIME TO BREAKTHROUGH", "Ryan's Apartment", "12/8/2014", "Ryan's Desk", "72364"),
+        ("BeyonceJay", "Danville Civic Center", "1/1/15", "Bring your own folding chair", "51438"),
+        ("Bugemon - Gotta patch them all", "Professor Eggert's Bugemon Lab", "12/11/15", "Tall grass", "05143"),
+        ("num_char && teh googles", "David's lappy", "11/25/13", "Desk chair", "71293"),
+        ("Volus Squad Benefit Concert - Remember the fallen", "Shepard's favorite store on the Citadel", "6/17/2193", "Earth-clan seating", "02943" ),
+        ("The Art of Carnage - Brogan Presenting", "TUTANKA (Hazard)", "9/18/2195", "Behind a chest-high wall", "72943")
+
+
     ]
     
     var addedTickets: [CustomTableViewCell] = []
