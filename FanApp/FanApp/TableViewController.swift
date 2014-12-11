@@ -46,7 +46,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         ("Bugemon - Gotta patch them all", "Professor Eggert's Bugemon Lab", "12/11/15", "Tall grass", "05143"),
         ("num_char && teh googles", "David's lappy", "11/25/13", "Desk chair", "71293"),
         ("Volus Squad Benefit Concert - Remember the fallen", "Shepard's favorite store on the Citadel", "6/17/2193", "Earth-clan seating", "02943" ),
-        ("The Art of Carnage - Brogan Presenting", "TUTANKA (Hazard)", "9/18/2195", "Behind a chest-high wall", "72943")
+        ("The Art of Carnage - Brogan Presenting", "TUCHANKA (Hazard)", "9/18/2195", "Behind a chest-high wall", "72943")
 
 
     ]

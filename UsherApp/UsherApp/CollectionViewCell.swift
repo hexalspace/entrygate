@@ -53,13 +53,14 @@ class CollectionViewCell: UICollectionViewCell {
     }
 
     func copyCell(adjCell: CollectionViewCell){
-        self.cellIndex = adjCell.cellIndex
+        self.cellIndex = adjCell.cellIndex-1
         self.ticketID = adjCell.ticketID
         self.eventName = adjCell.eventName
         self.peripheral = adjCell.peripheral
         self.backgroundColor = adjCell.backgroundColor
         self.colorID = adjCell.colorID
         self.recievedValidatedColor = adjCell.recievedValidatedColor
+        self.ticketValidatedCharacteristic = adjCell.ticketValidatedCharacteristic
     }
 
     func resetCell(){

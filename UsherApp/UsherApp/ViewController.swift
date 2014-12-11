@@ -187,6 +187,11 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
         if (nextCell < MAX_FANS){
             //peripheralUser[nextCell] = peripheral
+            for peripherals in peripheralUser{
+                if(peripheral.identifier == peripherals.identifier){
+                    return
+                }
+            }
             peripheralUser.append(peripheral)
             println(peripheral)
             println(advertisementData)
@@ -194,6 +199,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             debugPrint("Discovered peripheral")
             centralManager.connectPeripheral(peripheralUser[nextCell], options: nil)
             debugPrint("Tried to connect")
+            
         }
     }
     
@@ -235,6 +241,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
 
     func removePeripheral(index: Int){
         var j = 0
+        var i : Int!
         // Invalidate disconnected peripheral
         for i in 0...MAX_FANS-1 {
             var curPath = NSIndexPath(forRow: i, inSection: 0)
