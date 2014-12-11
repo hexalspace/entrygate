@@ -64,16 +64,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         appTitleLabel.text = "Ticketmaster"
         self.view.addSubview(appTitleLabel)
 
-        // Add ticket label
-        /*ticketNumberLabel = UILabel()
-        ticketNumberLabel.frame = CGRectMake(0, (2*screenHeight)/20, screenWidth, screenHeight/10)
-        ticketNumberLabel.textAlignment = NSTextAlignment.Center
-        ticketNumberLabel.numberOfLines = 1
-        ticketNumberLabel.font = UIFont(name: "Helvetica", size: 15.0)
-        ticketNumberLabel.text = ""
-        //ticketNumberLabel.text = ""
-        self.view.addSubview(ticketNumberLabel)*/
-
         if (DEBUG){
             // Add debugging log (good for on-phone testing)
             debugTextView = UITextView()
@@ -164,13 +154,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         alert.addAction(UIAlertAction(title: "Validate", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction!) in self.validateTicket(cell)}))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
-        
-        //following code moved to validateTicket
-        /*if (cell.peripheral != nil){
-            if (cell.recievedValidatedColor){
-                cell.peripheral!.writeValue(stringToData(VALIDATE_STRING), forCharacteristic: cell.ticketValidatedCharacteristic!, type: CBCharacteristicWriteType.WithResponse)
-            }
-        }*/
 
         debugPrint("Selected: \(cell.ticketID)");
     }
@@ -186,7 +169,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     //// CBDelegateManager Functions
     func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
         if (nextCell < MAX_FANS){
-            //peripheralUser[nextCell] = peripheral
             for peripherals in peripheralUser{
                 if(peripheral.identifier == peripherals.identifier){
                     return
@@ -229,36 +211,24 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
 
     func centralManager(central: CBCentralManager!, didDisconnectPeripheral peripheral: CBPeripheral!, error: NSError!) {
         debugPrint("Connection failed")
-        if (peripheral.services != nil){
-            var cell = getCell(peripheral)!
-            removePeripheral(cell.cellIndex)
-        }
-        //self.startScan(scanSwitch)
+        var cell = getCell(peripheral)!
+        removePeripheral(cell.cellIndex)
         centralManager.stopScan()
         centralManager.scanForPeripheralsWithServices([TM_FAN_CLIENT_COMMS_SERVICE], options: nil)
-        //centralManager.connectPeripheral(peripheralUser, options: nil)
     }
 
     func removePeripheral(index: Int){
-        var j = 0
-        var i : Int!
-        // Invalidate disconnected peripheral
-        for i in 0...MAX_FANS-1 {
-            var curPath = NSIndexPath(forRow: i, inSection: 0)
-            var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
-            if (cell.peripheral!.identifier == peripheralUser[index]!.identifier){
-                availableColors.append(cell.colorID)
-                debugPrint("Removing peripheral: " + cell.ticketID)
-                reuseColorID(cell.colorID)
-                cell.resetCell()
-                j = i
-                nextCell--
-                break
-            }
-        }
+        var curPath = NSIndexPath(forRow: index, inSection: 0)
+        var cell = collectionView.cellForItemAtIndexPath(curPath) as CollectionViewCell
+        availableColors.append(cell.colorID)
+        debugPrint("Removing peripheral: " + cell.ticketID)
+        reuseColorID(cell.colorID)
+        cell.resetCell()
+        nextCell--
+
         peripheralUser.removeAtIndex(index)
         // Shift other peripherals up
-        for i in j...MAX_FANS-1 {
+        for i in index...MAX_FANS-1 {
             var curPath = NSIndexPath(forRow: i, inSection: 0)
             var nextPath = NSIndexPath(forRow: i+1, inSection: 0)
             if (i != MAX_FANS-1){
@@ -392,30 +362,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
                 default:
                     break
             }
-            //refreshUI()
         }
         
-        //Code wasn't running, bypassed by Ryan's Write code
-        /*else if characteristic.properties == CBCharacteristicProperties.Write {
-            switch characteristic.UUID {
-                case TM_FAN_CLIENT_VALIDATION_COLOR_CHARACTERISTIC:
-                    debugPrint("Noted VALIDATION_COLOR characteristic")
-                    cell.validationColorCharacteristic = characteristic
-                    break
-                case TM_FAN_CLIENT_TICKET_VALIDATED_CHARACTERISTIC:
-                    debugPrint("Noted TICKET_VALIDATED characteristic")
-                    cell.ticketValidatedCharacteristic = characteristic
-                    break
-                default:
-                    break
-            }
-        }
-
-        if (cell.validationColorCharacteristic != nil){
-           if (cell.ticketValidatedCharacteristic != nil){
-                cell.peripheral!.writeValue(stringToData(String(cell.colorID)), forCharacteristic: cell.validationColorCharacteristic!, type: CBCharacteristicWriteType.WithResponse)
-            }
-        }*/
     }
 }
 

@@ -60,7 +60,8 @@ class SelectedTicketViewController: UIViewController/*, CBPeripheralManagerDeleg
         searchButtonUpdated(self)
 
     }
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -143,7 +144,7 @@ class SelectedTicketViewController: UIViewController/*, CBPeripheralManagerDeleg
     
     
     @IBAction func helpPressed(sender: AnyObject) {
-        let alert = UIAlertController(title: "Help", message: "Tap the switch above \"Search for Usher\" to search for an usher to validate your ticket. Connection wil be handled automatically", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Help", message: "Tap the switch above \"Search for Usher\" to search for an usher to validate your ticket. Connection will be handled automatically", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
     }
